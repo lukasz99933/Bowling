@@ -1,4 +1,4 @@
-h1>Bowling</h1>
+<h1>Bowling</h1>
 
 <h2>Jak zainstalować pre-commit (automatyczne formatowanie przed commitowaniu)</h2>
 
