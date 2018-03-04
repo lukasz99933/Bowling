@@ -1,6 +1,6 @@
 <h1>Bowling</h1>
 
-<h2>Jak zainstalować pre-commit (automatyczne formatowanie przed commitowaniu)</h2>
+<h2>Jak zainstalować pre-commit (automatyczne formatowanie przed commitowaniem)</h2>
 
 <p> W katalogu repozytorium wykonujemy komendy:
 cd .git
