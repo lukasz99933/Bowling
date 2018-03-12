@@ -5,6 +5,7 @@ using namespace std;
 
 bool Bowling::fillTokens(const string s)
 {
+  cout << s << endl;
   return true;
 }
 
@@ -33,7 +34,7 @@ void Bowling::bonuses()
 int Bowling::score(const string s) const
 {
   int result = 0;
-  
+  cout << s << endl;
 
   return result;
 }
