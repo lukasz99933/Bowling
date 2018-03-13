@@ -1,5 +1,4 @@
-#ifndef BOWLING_INCLUDED
-#define BOWLING_INCLUDED
+#pragma once
 
 #include <iostream>
 #include <vector>
@@ -15,8 +14,4 @@ public:
 private:
   vector<string> tokens;
 };
-
-
-
-#endif
 
