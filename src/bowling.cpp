@@ -2,5 +2,16 @@
 
 using namespace std;
 
+void Bowling::fillTokens(const string s)
+{
+//  s;
+  if (s=="") {};
+}
+
+vector<string> Bowling::getTokens()
+{
+  return tokens;
+}
+
 
  

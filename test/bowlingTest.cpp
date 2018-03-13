@@ -10,6 +10,13 @@ class bowlingTest : public ::testing::Test
 
 TEST_F(bowlingTest, skeleton)
 {
-    ASSERT_TRUE(true);
+  ASSERT_TRUE(true);
+}
+
+TEST_F(bowlingTest, emptyTokens)
+{
+  Bowling game;
+  game.fillTokens("");  
+  ASSERT_TRUE(game.getTokens().empty());
 }
 

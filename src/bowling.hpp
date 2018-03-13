@@ -7,9 +7,13 @@
 using namespace std;
 
 
-class Bowling {
+class Bowling 
+{
 public:
+  void fillTokens(const string s);
+  vector<string> getTokens();
 private:
+  vector<string> tokens;
 };
 
 
