@@ -1,0 +1,8 @@
+#!/bin/bash
+
+file="${1}"
+
+for file in git diff-index --cached --name-only HEAD ;
+  do clang-format -i -style=Google *cpp *hpp
+    done
+~          

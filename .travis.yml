@@ -1,0 +1,15 @@
+sudo: required
+language: cpp
+os:
+        - linux
+
+compiler:
+        - g++
+        - clang
+
+script:
+        - mkdir build
+        - cd build
+        - cmake ..
+        - make
+        - ./Bowling
