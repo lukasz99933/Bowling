@@ -10,7 +10,7 @@ using namespace std;
 class Bowling 
 {
 public:
-  void fillTokens(const string s);
+  void fillTokens(const string& s);
   vector<string> getTokens();
 private:
   vector<string> tokens;
