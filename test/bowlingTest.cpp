@@ -16,3 +16,13 @@ TEST_F(bowlingTest, emptyTokens)
   ASSERT_TRUE(game.getTokens().empty());
 }
 
+
+TEST_F(bowlingTest, oneSimpleToken)
+{
+  Bowling game;
+  string s = " ";
+  game.fillTokens(s);  
+  ASSERT_FALSE(game.getTokens().empty());
+  ASSERT_TRUE(game.getTokens()[0] == s);
+}
+
