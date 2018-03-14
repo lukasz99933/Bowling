@@ -13,7 +13,9 @@ TEST_F(bowlingTest, emptyTokens)
 {
   Bowling game;
   game.fillTokens("");  
-  ASSERT_TRUE(game.getTokens().empty());
+  ASSERT_FALSE(game.getTokens().empty());
+  ASSERT_TRUE(game.getTokens()[0] == "");
+// the question is: should really Tokens be empty? Or maybe they should have one empty string instead...
 }
 
 
@@ -24,5 +26,16 @@ TEST_F(bowlingTest, oneSimpleToken)
   game.fillTokens(s);  
   ASSERT_FALSE(game.getTokens().empty());
   ASSERT_TRUE(game.getTokens()[0] == s);
+}
+
+
+TEST_F(bowlingTest, twoEmptyTokens)
+{
+  Bowling game;
+  string s = "|";
+  game.fillTokens(s);  
+  ASSERT_FALSE(game.getTokens().empty());
+  ASSERT_TRUE(game.getTokens()[0] == "");
+  ASSERT_TRUE(game.getTokens()[1] == "");
 }
 
