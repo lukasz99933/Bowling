@@ -76,4 +76,19 @@ TEST_F(bowlingTest, allTokens)
   ASSERT_TRUE(tokens.at(10) == "81");
 }
 
+TEST_F(bowlingTest, validation)
+{
+    Bowling game;
+    game.fillTokens("X|7/|9-|X|-8|8/|-6|X|X|X||81");
+    auto tokens = game.getTokens();
+    ASSERT_TRUE(game.validateIsCorrect(tokens));
 
+    game.fillTokens("a||X|123456");
+    tokens = game.getTokens();
+    ASSERT_FALSE(game.validateIsCorrect(tokens));
+
+    game.fillTokens("Y|7/|9-|X|-8|8/|-6|X|X|X||81");
+    tokens = game.getTokens();
+    ASSERT_FALSE(game.validateIsCorrect(tokens));
+
+}

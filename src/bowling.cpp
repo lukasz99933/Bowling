@@ -21,5 +21,26 @@ vector<string> Bowling::getTokens()
   return tokens;
 }
 
+bool Bowling::validateIsCorrect(const vector<string>& tokens)
+{
+    for(string token : tokens)
+    {
+        if(token.size()>2)
+        {
+            return false;
+        }
+
+        for(char sign : token)
+        {
+            if(sign!='X' && sign!='/' && sign!='-' && sign!='|' && sign!='0' && sign!='1' && sign!='2' && sign!='3' && sign!='4' && sign!='5' && sign!='6' && sign!='7' && sign!='8' && sign!='9')
+            {
+                return false;
+            }
+        }
+    }
+
+   return true;
+}
+
 
  
