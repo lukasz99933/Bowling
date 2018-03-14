@@ -1,15 +1,17 @@
 #include "bowling.hpp"
+#include <string>
 
 using namespace std;
 
 void Bowling::fillTokens(const string& s)
 {
-  auto pos = s.find("|");
- 
-  string s1 = s.substr(0,pos);
-  tokens.push_back(s1);
-  s1 = s.substr(pos+1, s.length());
-  tokens.push_back(s1);
+  string s0 = s;
+  string::size_type pos;
+  while ((pos = s0.find("|")) != string::npos) {  
+    tokens.push_back(s0.substr(0,pos));
+    s0 = s0.substr(pos+1, s0.length());  
+  }
+  tokens.push_back(s0);
 }
 
 vector<string> Bowling::getTokens()
