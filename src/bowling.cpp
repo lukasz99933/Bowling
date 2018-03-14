@@ -12,6 +12,8 @@ void Bowling::fillTokens(const string& s)
     s0 = s0.substr(pos+1, s0.length());  
   }
   tokens.push_back(s0);
+  if (tokens.size() > 11) 
+    tokens.erase(tokens.begin() + 10);
 }
 
 vector<string> Bowling::getTokens()
