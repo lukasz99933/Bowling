@@ -117,7 +117,7 @@ TEST_F(bowlingTest, _9minusTokens)
 
 TEST_F(bowlingTest, _5slashTokens)
 {
-  game.fillTokens(ex5slash);  
+  game.fillTokens(ex5s);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "5/");
   ASSERT_EQ(tokens.at(1), "5/");
@@ -172,4 +172,9 @@ TEST_F(bowlingTest, translate1)
     ASSERT_EQ(translateChar('1'),1);
 }
 
+
+TEST_F(bowlingTest, translate2)
+{
+    ASSERT_EQ(translateChar('2'),2);
+}
 
