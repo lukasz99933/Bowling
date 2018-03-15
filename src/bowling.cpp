@@ -56,7 +56,10 @@ void translate(const string& s)
 
 int translateChar(const char ch)
 {
-  return ch - '0';
+  if (ch=='X')
+    return 10;
+  else 
+    return ch - '0';
 }
 
  

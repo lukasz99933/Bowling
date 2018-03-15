@@ -178,3 +178,10 @@ TEST_F(bowlingTest, translate2)
     ASSERT_EQ(translateChar('2'),2);
 }
 
+
+TEST_F(bowlingTest, translateX)
+{
+    ASSERT_EQ(translateChar('X'),10);
+}
+
+
