@@ -70,18 +70,37 @@ TEST_F(bowlingTest, allTokens)
   ASSERT_EQ(tokens.at(10), "81");
 }
 
-TEST_F(bowlingTest, validation)
+TEST_F(bowlingTest, validationToMuchSigns)
 {
-    game.fillTokens("X|7/|9-|X|-8|8/|-6|X|X|X||81");
-    auto tokens = game.getTokens();
-    ASSERT_TRUE(game.validateIsCorrect(tokens));
+    game.fillTokens("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
+    ASSERT_FALSE(game.validateTokens());
+}
 
+TEST_F(bowlingTest, validationNotCorrectSigns)
+{
     game.fillTokens("a||X|123456");
-    tokens = game.getTokens();
-    ASSERT_FALSE(game.validateIsCorrect(tokens));
+    ASSERT_FALSE(game.validateTokens());
+    game.clearTokens();
 
     game.fillTokens("Y|7/|9-|X|-8|8/|-6|X|X|X||81");
-    tokens = game.getTokens();
-    ASSERT_FALSE(game.validateIsCorrect(tokens));
+    ASSERT_FALSE(game.validateTokens());
+    game.clearTokens();
 
+    game.fillTokens("X|7/|9-|X|-8|8/|-6|X|X|X||81");
+    ASSERT_TRUE(game.validateTokens());
 }
+
+TEST_F(bowlingTest, validationTooLessSigns)
+{
+    game.fillTokens("|||X||81");
+    ASSERT_FALSE(game.validateTokens());
+    game.clearTokens();
+
+    game.fillTokens("X|7/|9-|X|||-8|8/|-6|X|X|X||81");
+    ASSERT_FALSE(game.validateTokens());
+    game.clearTokens();
+
+    game.fillTokens("X|7/|9-|X|||||-8|8/|-6|X|X|X||81");
+    ASSERT_FALSE(game.validateTokens());
+}
+

@@ -11,7 +11,8 @@ class Bowling
 public:
   void fillTokens(const string& s);
   vector<string> getTokens();
-  bool validateIsCorrect(const vector<string>& tokens);
+  bool validateTokens();
+  void clearTokens();
 private:
   vector<string> tokens;
 };
