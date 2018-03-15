@@ -10,7 +10,7 @@ public:
 
 // examples from readme.txt :
  const string exXs = "X|X|X|X|X|X|X|X|X|X||XX";
- const string ex9s = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
+ const string ex9ms = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
  const string ex5s = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
  const string exMixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
 };
@@ -96,6 +96,23 @@ TEST_F(bowlingTest, xsTokens)
   ASSERT_EQ(tokens.at(8), "X");
   ASSERT_EQ(tokens.at(9), "X");
   ASSERT_EQ(tokens.at(10), "XX");
+}
+
+TEST_F(bowlingTest, _9minusTokens)
+{
+  game.fillTokens(ex9ms);  
+  auto tokens = game.getTokens();
+  ASSERT_EQ(tokens.at(0), "9-");
+  ASSERT_EQ(tokens.at(1), "9-");
+  ASSERT_EQ(tokens.at(2), "9-");
+  ASSERT_EQ(tokens.at(3), "9-");
+  ASSERT_EQ(tokens.at(4), "9-");
+  ASSERT_EQ(tokens.at(5), "9-");
+  ASSERT_EQ(tokens.at(6), "9-");
+  ASSERT_EQ(tokens.at(7), "9-");
+  ASSERT_EQ(tokens.at(8), "9-");
+  ASSERT_EQ(tokens.at(9), "9-");
+  ASSERT_EQ(tokens.at(10), "");
 }
 
 TEST_F(bowlingTest, validationToMuchSigns)
