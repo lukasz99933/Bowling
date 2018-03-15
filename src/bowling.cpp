@@ -56,9 +56,7 @@ void translate(const string& s)
 
 int translateChar(const char ch)
 {
-  if (ch==' ') 
-    {} ; // to prevent warning
-  return 1;
+  return ch - '0';
 }
 
  
