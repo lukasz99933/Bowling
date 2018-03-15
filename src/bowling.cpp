@@ -48,5 +48,17 @@ bool Bowling::validateTokens()
    return true;
 }
 
+void translate(const string& s)
+{
+  if (s=="") 
+    {} ; // to prevent warning
+}
+
+int translateChar(const char ch)
+{
+  if (ch==' ') 
+    {} ; // to prevent warning
+  return 1;
+}
 
  

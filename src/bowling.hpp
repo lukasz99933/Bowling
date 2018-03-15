@@ -15,5 +15,9 @@ public:
   void clearTokens();
 private:
   vector<string> tokens;
+  vector<string> results;
 };
+
+void translate(const string& s);
+int translateChar(const char ch);
 

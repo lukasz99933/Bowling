@@ -104,3 +104,10 @@ TEST_F(bowlingTest, validationTooLessSigns)
     ASSERT_FALSE(game.validateTokens());
 }
 
+
+TEST_F(bowlingTest, translate1)
+{
+    ASSERT_EQ(translateChar('1'),1);
+}
+
+
