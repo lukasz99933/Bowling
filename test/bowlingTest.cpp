@@ -16,6 +16,8 @@ public:
 };
 
 
+// test of fillTokens method :
+
 TEST_F(bowlingTest, emptyToken)
 {
   game.fillTokens("");  
@@ -166,22 +168,29 @@ TEST_F(bowlingTest, validationTooLessSigns)
     ASSERT_FALSE(game.validateTokens());
 }
 
+// test of translateChar function :
+
 
 TEST_F(bowlingTest, translate1)
 {
-    ASSERT_EQ(translateChar('1'),1);
+    ASSERT_EQ(translateChar('1'), 1);
 }
 
 
 TEST_F(bowlingTest, translate2)
 {
-    ASSERT_EQ(translateChar('2'),2);
+    ASSERT_EQ(translateChar('2'), 2);
 }
 
 
-TEST_F(bowlingTest, translateX)
+TEST_F(bowlingTest, translateStrike)
 {
-    ASSERT_EQ(translateChar('X'),10);
+    ASSERT_EQ(translateChar('X'), 10);
+}
+
+TEST_F(bowlingTest, translateMiss)
+{
+    ASSERT_EQ(translateChar('-'), 0);
 }
 
 

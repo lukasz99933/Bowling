@@ -48,18 +48,14 @@ bool Bowling::validateTokens()
    return true;
 }
 
-void translate(const string& s)
-{
-  if (s=="") 
-    {} ; // to prevent warning
-}
 
 int translateChar(const char ch)
 {
-  if (ch=='X')
-    return 10;
-  else 
-    return ch - '0';
+  switch(ch) {
+    case 'X': return 10;
+    case '-': return 0;
+    default:  return ch - '0';
+  }
 }
 
  
