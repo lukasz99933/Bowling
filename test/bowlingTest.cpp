@@ -7,6 +7,12 @@ class bowlingTest : public ::testing::Test
 {
 public:
   Bowling game;
+
+// examples from readme.txt :
+ const string exXs = "X|X|X|X|X|X|X|X|X|X||XX";
+ const string ex9s = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
+ const string ex5s = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
+ const string exMixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
 };
 
 
@@ -58,16 +64,38 @@ TEST_F(bowlingTest, fourTokens)
   ASSERT_EQ(tokens.at(3), "123456");
 }
 
-TEST_F(bowlingTest, allTokens)
+TEST_F(bowlingTest, mixedTokens)
 {
-  game.fillTokens("X|7/|9-|X|-8|8/|-6|X|X|X||81");  
+  game.fillTokens(exMixed);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "X");
   ASSERT_EQ(tokens.at(1), "7/");
   ASSERT_EQ(tokens.at(2), "9-");
   ASSERT_EQ(tokens.at(3), "X");
+  ASSERT_EQ(tokens.at(4), "-8");
+  ASSERT_EQ(tokens.at(5), "8/");
+  ASSERT_EQ(tokens.at(6), "-6");
+  ASSERT_EQ(tokens.at(7), "X");
+  ASSERT_EQ(tokens.at(8), "X");
   ASSERT_EQ(tokens.at(9), "X");
   ASSERT_EQ(tokens.at(10), "81");
+}
+
+TEST_F(bowlingTest, xsTokens)
+{
+  game.fillTokens(exXs);  
+  auto tokens = game.getTokens();
+  ASSERT_EQ(tokens.at(0), "X");
+  ASSERT_EQ(tokens.at(1), "X");
+  ASSERT_EQ(tokens.at(2), "X");
+  ASSERT_EQ(tokens.at(3), "X");
+  ASSERT_EQ(tokens.at(4), "X");
+  ASSERT_EQ(tokens.at(5), "X");
+  ASSERT_EQ(tokens.at(6), "X");
+  ASSERT_EQ(tokens.at(7), "X");
+  ASSERT_EQ(tokens.at(8), "X");
+  ASSERT_EQ(tokens.at(9), "X");
+  ASSERT_EQ(tokens.at(10), "XX");
 }
 
 TEST_F(bowlingTest, validationToMuchSigns)
