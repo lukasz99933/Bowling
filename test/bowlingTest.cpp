@@ -115,6 +115,23 @@ TEST_F(bowlingTest, _9minusTokens)
   ASSERT_EQ(tokens.at(10), "");
 }
 
+TEST_F(bowlingTest, _5slashTokens)
+{
+  game.fillTokens(ex5slash);  
+  auto tokens = game.getTokens();
+  ASSERT_EQ(tokens.at(0), "5/");
+  ASSERT_EQ(tokens.at(1), "5/");
+  ASSERT_EQ(tokens.at(2), "5/");
+  ASSERT_EQ(tokens.at(3), "5/");
+  ASSERT_EQ(tokens.at(4), "5/");
+  ASSERT_EQ(tokens.at(5), "5/");
+  ASSERT_EQ(tokens.at(6), "5/");
+  ASSERT_EQ(tokens.at(7), "5/");
+  ASSERT_EQ(tokens.at(8), "5/");
+  ASSERT_EQ(tokens.at(9), "5/");
+  ASSERT_EQ(tokens.at(10), "5");
+}
+
 TEST_F(bowlingTest, validationToMuchSigns)
 {
     game.fillTokens("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
