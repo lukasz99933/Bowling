@@ -54,7 +54,8 @@ int translateChar(const char ch)
   switch(ch) {
     case 'X': return 10;
     case '-': return 0;
-    default:  return ch - '0';
+    case '/': return 0;
+    default : return ch - '0';
   }
 }
 

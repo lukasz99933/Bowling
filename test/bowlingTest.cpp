@@ -193,4 +193,9 @@ TEST_F(bowlingTest, translateMiss)
     ASSERT_EQ(translateChar('-'), 0);
 }
 
+TEST_F(bowlingTest, translateSpare)
+{
+    ASSERT_EQ(translateChar('/'), 0);  // temporary
+}
+
 
