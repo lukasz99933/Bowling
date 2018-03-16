@@ -11,6 +11,7 @@ public:
  const string alwaysAlmostPerfect = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
  const string twentyOneFives = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
  const string mixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
+ const string nothingAtAll = "-|-|-|-|-|-|-|-|-|-||";
 };
 
 
@@ -169,17 +170,25 @@ TEST_F(bowlingTest, translate1)
 
 TEST_F(bowlingTest, noBonuses)
 {
-  Bowling game1("");
+  Bowling game1(nothingAtAll);
   game1.countBonuses();
   auto bonuses1 = game1.getBonuses();
   ASSERT_EQ(bonuses1.at(0), 0);
- 
-  Bowling game2("|");
-  game2.countBonuses();
-  auto bonuses2 = game2.getBonuses();
-  ASSERT_EQ(bonuses2.at(0), 0);
-  ASSERT_EQ(bonuses2.at(1), 0);
-  
-
+  ASSERT_EQ(bonuses1.at(1), 0);
+  ASSERT_EQ(bonuses1.at(2), 0);
+  ASSERT_EQ(bonuses1.at(3), 0);
+  ASSERT_EQ(bonuses1.at(4), 0);
+  ASSERT_EQ(bonuses1.at(5), 0);
+  ASSERT_EQ(bonuses1.at(6), 0);
+  ASSERT_EQ(bonuses1.at(7), 0);
+  ASSERT_EQ(bonuses1.at(8), 0);
+  ASSERT_EQ(bonuses1.at(9), 0);
 }
 
+TEST_F(bowlingTest, bonusesFives)
+{
+  Bowling game1(twentyOneFives);
+  game1.countBonuses();
+  auto bonuses1 = game1.getBonuses();
+  ASSERT_EQ(bonuses1.at(0), 5);
+}
