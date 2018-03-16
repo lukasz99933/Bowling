@@ -177,7 +177,8 @@ TEST_F(bowlingTest, noBonuses)
   Bowling game2("|");
   game2.countBonuses();
   auto bonuses2 = game2.getBonuses();
-  ASSERT_EQ(bonuses1.at(1), 0);
+  ASSERT_EQ(bonuses2.at(0), 0);
+  ASSERT_EQ(bonuses2.at(1), 0);
   
 
 }
