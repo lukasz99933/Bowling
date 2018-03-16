@@ -9,14 +9,14 @@ public:
   Bowling game;
 
 // examples from readme.txt :
- const string exXs = "X|X|X|X|X|X|X|X|X|X||XX";
- const string ex9ms = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
- const string ex5s = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
- const string exMixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
+ const string perfectScore = "X|X|X|X|X|X|X|X|X|X||XX";
+ const string alwaysAlmostPerfect = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
+ const string twentyOneFives = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
+ const string mixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
 };
 
 
-// test of fillTokens method :
+// tests of fillTokens method:
 
 TEST_F(bowlingTest, emptyToken)
 {
@@ -48,27 +48,16 @@ TEST_F(bowlingTest, twoEmptyTokens)
 
 TEST_F(bowlingTest, threeTokens)
 {
-  game.fillTokens("a|grrr|X");  
+  game.fillTokens("||");  
   auto tokens = game.getTokens();
-  ASSERT_EQ(tokens.at(0), "a");
-  ASSERT_EQ(tokens.at(1), "grrr");
-  ASSERT_EQ(tokens.at(2), "X");
-}
-
-
-TEST_F(bowlingTest, fourTokens)
-{
-  game.fillTokens("a||X|123456");  
-  auto tokens = game.getTokens();
-  ASSERT_EQ(tokens.at(0), "a");
+  ASSERT_EQ(tokens.at(0), "");
   ASSERT_EQ(tokens.at(1), "");
-  ASSERT_EQ(tokens.at(2), "X");
-  ASSERT_EQ(tokens.at(3), "123456");
+  ASSERT_EQ(tokens.at(2), "");
 }
 
 TEST_F(bowlingTest, mixedTokens)
 {
-  game.fillTokens(exMixed);  
+  game.fillTokens(mixed);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "X");
   ASSERT_EQ(tokens.at(1), "7/");
@@ -85,7 +74,7 @@ TEST_F(bowlingTest, mixedTokens)
 
 TEST_F(bowlingTest, xsTokens)
 {
-  game.fillTokens(exXs);  
+  game.fillTokens(perfectScore);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "X");
   ASSERT_EQ(tokens.at(1), "X");
@@ -102,7 +91,7 @@ TEST_F(bowlingTest, xsTokens)
 
 TEST_F(bowlingTest, _9minusTokens)
 {
-  game.fillTokens(ex9ms);  
+  game.fillTokens(alwaysAlmostPerfect);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "9-");
   ASSERT_EQ(tokens.at(1), "9-");
@@ -119,7 +108,7 @@ TEST_F(bowlingTest, _9minusTokens)
 
 TEST_F(bowlingTest, _5slashTokens)
 {
-  game.fillTokens(ex5s);  
+  game.fillTokens(twentyOneFives);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "5/");
   ASSERT_EQ(tokens.at(1), "5/");
@@ -133,6 +122,8 @@ TEST_F(bowlingTest, _5slashTokens)
   ASSERT_EQ(tokens.at(9), "5/");
   ASSERT_EQ(tokens.at(10), "5");
 }
+
+// tests of validateTokens method:
 
 TEST_F(bowlingTest, validationToMuchSigns)
 {
@@ -150,7 +141,7 @@ TEST_F(bowlingTest, validationNotCorrectSigns)
     ASSERT_FALSE(game.validateTokens());
     game.clearTokens();
 
-    game.fillTokens("X|7/|9-|X|-8|8/|-6|X|X|X||81");
+    game.fillTokens(mixed);
     ASSERT_TRUE(game.validateTokens());
 }
 
@@ -168,34 +159,15 @@ TEST_F(bowlingTest, validationTooLessSigns)
     ASSERT_FALSE(game.validateTokens());
 }
 
-// test of translateChar function :
-
+// tests of translateChar function:
 
 TEST_F(bowlingTest, translate1)
 {
-    ASSERT_EQ(translateChar('1'), 1);
-}
-
-
-TEST_F(bowlingTest, translate2)
-{
-    ASSERT_EQ(translateChar('2'), 2);
-}
-
-
-TEST_F(bowlingTest, translateStrike)
-{
-    ASSERT_EQ(translateChar('X'), 10);
-}
-
-TEST_F(bowlingTest, translateMiss)
-{
-    ASSERT_EQ(translateChar('-'), 0);
-}
-
-TEST_F(bowlingTest, translateSpare)
-{
-    ASSERT_EQ(translateChar('/'), 0);  // temporary
+  ASSERT_EQ(translateChar('1'), 1);
+  ASSERT_EQ(translateChar('2'), 2);
+  ASSERT_EQ(translateChar('X'), 10);
+  ASSERT_EQ(translateChar('-'), 0);
+  ASSERT_EQ(translateChar('/'), 0);  // temporary
 }
 
 

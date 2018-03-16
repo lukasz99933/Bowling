@@ -1,4 +1,5 @@
 #include "bowling.hpp"
+#include <iostream>
 #include <string>
 #include <cctype>
 
