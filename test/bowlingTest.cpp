@@ -230,5 +230,16 @@ TEST_F(bowlingTest, twoStrikesBonus)
   ASSERT_EQ(bonuses1.at(0), 12);
 }
 
+TEST_F(bowlingTest, perfectBonus)
+{
+  Bowling game1(perfectScore);
+  game1.countBonuses();
+  auto bonuses1 = game1.getBonuses();
+  ASSERT_EQ(bonuses1.at(0), 20);
+  ASSERT_EQ(bonuses1.at(1), 20);
+  ASSERT_EQ(bonuses1.at(9), 20);
+}
+
+
 
 
