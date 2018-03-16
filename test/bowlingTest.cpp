@@ -6,12 +6,12 @@ using namespace std;
 class bowlingTest : public ::testing::Test
 {
 public:
-// examples from readme.txt :
+// examples:
  const string perfectScore = "X|X|X|X|X|X|X|X|X|X||XX";
  const string alwaysAlmostPerfect = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
  const string twentyOneFives = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
  const string mixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
- const string nothingAtAll = "-|-|-|-|-|-|-|-|-|-||";
+ const string perfectNoob = "--|--|--|--|--|--|--|--|--|--||";
 };
 
 
@@ -170,7 +170,7 @@ TEST_F(bowlingTest, translate1)
 
 TEST_F(bowlingTest, noBonuses)
 {
-  Bowling game1(nothingAtAll);
+  Bowling game1(perfectNoob);
   game1.countBonuses();
   auto bonuses1 = game1.getBonuses();
   ASSERT_EQ(bonuses1.at(0), 0);
@@ -191,4 +191,26 @@ TEST_F(bowlingTest, bonusesFives)
   game1.countBonuses();
   auto bonuses1 = game1.getBonuses();
   ASSERT_EQ(bonuses1.at(0), 5);
+  ASSERT_EQ(bonuses1.at(1), 5);
+  ASSERT_EQ(bonuses1.at(2), 5);
+  ASSERT_EQ(bonuses1.at(3), 5);
+  ASSERT_EQ(bonuses1.at(4), 5);
+  ASSERT_EQ(bonuses1.at(5), 5);
+  ASSERT_EQ(bonuses1.at(6), 5);
+  ASSERT_EQ(bonuses1.at(7), 5);
+  ASSERT_EQ(bonuses1.at(8), 5);
+  ASSERT_EQ(bonuses1.at(9), 5);
 }
+
+TEST_F(bowlingTest, doesBonusSum)
+{
+
+  Bowling game1("X|34|--|--|--|--|--|--|--|--||");
+  game1.countBonuses();
+  auto bonuses1 = game1.getBonuses();
+  ASSERT_EQ(bonuses1.at(0), 7);
+}
+
+
+
+
