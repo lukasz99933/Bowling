@@ -68,8 +68,12 @@ void Bowling::countBonuses()
     if ((tokens.at(i).length() == 2) and (tokens.at(i)[1] == '/'))
       bonuses.push_back(translateChar(tokens.at(i+1)[0]));
     else if (tokens.at(i)[0] == 'X') {
-       if (tokens.at(i+1).length() == 2) 
-         bonuses.push_back(translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]));               
+       if (tokens.at(i+1).length() == 2) {
+         if (tokens.at(i+1)[1] == '/')
+           bonuses.push_back(10);               
+         else
+           bonuses.push_back(translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]));               
+       }
     }  
     else
       bonuses.push_back(0);

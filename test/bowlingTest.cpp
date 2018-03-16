@@ -212,5 +212,26 @@ TEST_F(bowlingTest, doesBonusSum)
 }
 
 
+TEST_F(bowlingTest, doesBonusCountSpare)
+{
+
+  Bowling game1("X|3/|--|--|--|--|--|--|--|--||");
+  game1.countBonuses();
+  auto bonuses1 = game1.getBonuses();
+  ASSERT_EQ(bonuses1.at(0), 10);
+}
+
+/*
+TEST_F(bowlingTest, twoStrikesBonus)
+{
+
+  Bowling game1("X|X|28|--|--|--|--|--|--|--||");
+  game1.countBonuses();
+  auto bonuses1 = game1.getBonuses();
+  ASSERT_EQ(bonuses1.at(0), 2);
+}
+*/
+
+
 
 
