@@ -18,7 +18,7 @@ Bowling::Bowling(const string& s)
     tokens.erase(tokens.begin() + 10);
 }
 
-vector<string> Bowling::getTokens()
+vector<string> Bowling::getTokens() const
 {
   return tokens;
 }
@@ -55,4 +55,14 @@ int translateChar(const char ch)
   }
 }
 
- 
+
+vector<int> Bowling::getBonuses() const
+{
+  return bonuses;
+}
+
+
+void Bowling::countBonuses()  
+{ 
+  bonuses.push_back(0);
+}

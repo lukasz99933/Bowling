@@ -165,3 +165,14 @@ TEST_F(bowlingTest, translate1)
 }
 
 
+// test of bonuses:
+
+TEST_F(bowlingTest, noBonuses)
+{
+  Bowling game1("");
+  game1.countBonuses();
+  auto bonuses1 = game1.getBonuses();
+  ASSERT_EQ(bonuses1.at(0), 0);
+ 
+}
+
