@@ -9,11 +9,9 @@ using namespace std;
 class Bowling 
 {
 public:
-
-  void fillTokens(const string& s);
+  Bowling(const string& s);
   vector<string> getTokens();
   bool validateTokens();
-  void clearTokens();
 private:
   vector<string> tokens;
 };

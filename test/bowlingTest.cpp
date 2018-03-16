@@ -6,8 +6,6 @@ using namespace std;
 class bowlingTest : public ::testing::Test
 {
 public:
-  Bowling game;
-
 // examples from readme.txt :
  const string perfectScore = "X|X|X|X|X|X|X|X|X|X||XX";
  const string alwaysAlmostPerfect = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
@@ -20,7 +18,7 @@ public:
 
 TEST_F(bowlingTest, emptyToken)
 {
-  game.fillTokens("");  
+  Bowling game("");  
   auto tokens = game.getTokens();
   ASSERT_FALSE(tokens.empty());
   ASSERT_EQ(tokens.at(0), "");
@@ -30,7 +28,7 @@ TEST_F(bowlingTest, emptyToken)
 TEST_F(bowlingTest, oneSimpleToken)
 {
   string s = "a";
-  game.fillTokens(s);  
+  Bowling game(s);  
   auto tokens = game.getTokens();
   ASSERT_FALSE(tokens.empty());
   ASSERT_EQ(tokens.at(0), s);
@@ -39,7 +37,7 @@ TEST_F(bowlingTest, oneSimpleToken)
 
 TEST_F(bowlingTest, twoEmptyTokens)
 {
-  game.fillTokens("|");  
+  Bowling game("|");  
   auto tokens = game.getTokens();
   ASSERT_FALSE(tokens.empty());
   ASSERT_EQ(tokens.at(0), "");
@@ -48,7 +46,7 @@ TEST_F(bowlingTest, twoEmptyTokens)
 
 TEST_F(bowlingTest, threeTokens)
 {
-  game.fillTokens("||");  
+  Bowling game("||");  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "");
   ASSERT_EQ(tokens.at(1), "");
@@ -57,7 +55,7 @@ TEST_F(bowlingTest, threeTokens)
 
 TEST_F(bowlingTest, mixedTokens)
 {
-  game.fillTokens(mixed);  
+  Bowling game(mixed);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "X");
   ASSERT_EQ(tokens.at(1), "7/");
@@ -74,7 +72,7 @@ TEST_F(bowlingTest, mixedTokens)
 
 TEST_F(bowlingTest, xsTokens)
 {
-  game.fillTokens(perfectScore);  
+  Bowling game(perfectScore);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "X");
   ASSERT_EQ(tokens.at(1), "X");
@@ -91,7 +89,7 @@ TEST_F(bowlingTest, xsTokens)
 
 TEST_F(bowlingTest, _9minusTokens)
 {
-  game.fillTokens(alwaysAlmostPerfect);  
+  Bowling game(alwaysAlmostPerfect);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "9-");
   ASSERT_EQ(tokens.at(1), "9-");
@@ -108,7 +106,7 @@ TEST_F(bowlingTest, _9minusTokens)
 
 TEST_F(bowlingTest, _5slashTokens)
 {
-  game.fillTokens(twentyOneFives);  
+  Bowling game(twentyOneFives);  
   auto tokens = game.getTokens();
   ASSERT_EQ(tokens.at(0), "5/");
   ASSERT_EQ(tokens.at(1), "5/");
@@ -127,36 +125,32 @@ TEST_F(bowlingTest, _5slashTokens)
 
 TEST_F(bowlingTest, validationToMuchSigns)
 {
-    game.fillTokens("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
+    Bowling game("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
     ASSERT_FALSE(game.validateTokens());
 }
 
 TEST_F(bowlingTest, validationNotCorrectSigns)
 {
-    game.fillTokens("a||X|123456");
-    ASSERT_FALSE(game.validateTokens());
-    game.clearTokens();
+    Bowling game1("a||X|123456");
+    ASSERT_FALSE(game1.validateTokens());
 
-    game.fillTokens("Y|7/|9-|X|-8|8/|-6|X|X|X||81");
-    ASSERT_FALSE(game.validateTokens());
-    game.clearTokens();
+    Bowling game2("Y|7/|9-|X|-8|8/|-6|X|X|X||81");
+    ASSERT_FALSE(game2.validateTokens());
 
-    game.fillTokens(mixed);
-    ASSERT_TRUE(game.validateTokens());
+    Bowling game3(mixed);
+    ASSERT_TRUE(game3.validateTokens());
 }
 
 TEST_F(bowlingTest, validationTooLessSigns)
 {
-    game.fillTokens("|||X||81");
-    ASSERT_FALSE(game.validateTokens());
-    game.clearTokens();
+    Bowling game1("|||X||81");
+    ASSERT_FALSE(game1.validateTokens());
 
-    game.fillTokens("X|7/|9-|X|||-8|8/|-6|X|X|X||81");
-    ASSERT_FALSE(game.validateTokens());
-    game.clearTokens();
+    Bowling game2("X|7/|9-|X|||-8|8/|-6|X|X|X||81");
+    ASSERT_FALSE(game2.validateTokens());
 
-    game.fillTokens("X|7/|9-|X|||||-8|8/|-6|X|X|X||81");
-    ASSERT_FALSE(game.validateTokens());
+    Bowling game3("X|7/|9-|X|||||-8|8/|-6|X|X|X||81");
+    ASSERT_FALSE(game3.validateTokens());
 }
 
 // tests of translateChar function:

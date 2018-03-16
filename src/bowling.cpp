@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void Bowling::fillTokens(const string& s)
+Bowling::Bowling(const string& s)
 {
   string s0 = s;
   string::size_type pos;
@@ -21,11 +21,6 @@ void Bowling::fillTokens(const string& s)
 vector<string> Bowling::getTokens()
 {
   return tokens;
-}
-
-void Bowling::clearTokens()
-{
-    tokens.clear();
 }
 
 bool Bowling::validateTokens()
