@@ -65,4 +65,5 @@ vector<int> Bowling::getBonuses() const
 void Bowling::countBonuses()  
 { 
   bonuses.push_back(0);
+  bonuses.push_back(0);
 }

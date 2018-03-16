@@ -174,5 +174,11 @@ TEST_F(bowlingTest, noBonuses)
   auto bonuses1 = game1.getBonuses();
   ASSERT_EQ(bonuses1.at(0), 0);
  
+  Bowling game2("|");
+  game2.countBonuses();
+  auto bonuses2 = game2.getBonuses();
+  ASSERT_EQ(bonuses1.at(1), 0);
+  
+
 }
 
