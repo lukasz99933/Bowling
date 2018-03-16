@@ -185,7 +185,7 @@ TEST_F(bowlingTest, noBonuses)
   ASSERT_EQ(bonuses1.at(9), 0);
 }
 
-TEST_F(bowlingTest, bonusesFives)
+TEST_F(bowlingTest, bonusesforFives)
 {
   Bowling game1(twentyOneFives);
   game1.countBonuses();
