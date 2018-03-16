@@ -221,17 +221,14 @@ TEST_F(bowlingTest, doesBonusCountSpare)
   ASSERT_EQ(bonuses1.at(0), 10);
 }
 
-/*
 TEST_F(bowlingTest, twoStrikesBonus)
 {
 
-  Bowling game1("X|X|28|--|--|--|--|--|--|--||");
+  Bowling game1("X|X|23|--|--|--|--|--|--|--||");
   game1.countBonuses();
   auto bonuses1 = game1.getBonuses();
-  ASSERT_EQ(bonuses1.at(0), 2);
+  ASSERT_EQ(bonuses1.at(0), 12);
 }
-*/
-
 
 
 

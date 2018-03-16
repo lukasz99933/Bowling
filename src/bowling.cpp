@@ -74,6 +74,8 @@ void Bowling::countBonuses()
          else
            bonuses.push_back(translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]));               
        }
+       else if (tokens.at(i+1)[0] == 'X')
+           bonuses.push_back(10 + translateChar(tokens.at(i+2)[0]));                             
     }  
     else
       bonuses.push_back(0);
