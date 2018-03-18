@@ -6,5 +6,4 @@
 <p> cp clang-format.hook .git/hooks/pre-commit </p>
 <p> cd .git/hooks </p>
 <p> chmod +x pre-commit </p>
-<p>cd .git</p>
-<p>cd hooks</p>
+<p> Gotowe! </p>
