@@ -61,6 +61,10 @@ vector<int> Bowling::getBonuses() const
   return bonuses;
 }
 
+int Bowling::getPoints() const
+{
+  return points;
+}
 
 void Bowling::countBonuses()  
 {
@@ -80,4 +84,54 @@ void Bowling::countBonuses()
     else
       bonuses.push_back(0);
   }
+}
+
+void Bowling::countPoints()
+{
+    auto tokens = getTokens();
+    int countStrikes=0;
+    points=0;
+    for(int i=0;i<10;i++)
+    {
+        auto token = tokens.at(i);
+
+        if(token.compare("X")==0)
+        {
+            countStrikes++;
+            points+=20;
+        }
+        else
+        {
+            char firstChar = token[0];
+            char secondChar = token[1];
+
+            if(isdigit(firstChar))
+            {
+                if(secondChar=='/')
+                {
+                    points += (int)10+(firstChar-48);
+                }
+                else if(secondChar=='-')
+                {
+                    points += (int)firstChar-48;
+                }
+                else if(isdigit(secondChar))
+                {
+                    points += ((int)firstChar-48) + ((int)secondChar-48);
+                }
+            }
+            else if(firstChar=='-')
+            {
+                if(isdigit(secondChar))
+                {
+                    points += (int)secondChar-48;
+                }
+            }
+        }
+    }
+
+    if(countStrikes==10)
+    {
+        points = 300;
+    }
 }

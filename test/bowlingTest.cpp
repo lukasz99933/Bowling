@@ -240,6 +240,24 @@ TEST_F(bowlingTest, perfectBonus)
   ASSERT_EQ(bonuses1.at(9), 20);
 }
 
+TEST_F(bowlingTest, countPoints)
+{
+    Bowling game1(perfectScore);
+    game1.countPoints();
+    ASSERT_EQ(game1.getPoints(),300);
+
+    Bowling game2(alwaysAlmostPerfect);
+    game2.countPoints();
+    ASSERT_EQ(game2.getPoints(), 90);
+
+    Bowling game3(twentyOneFives);
+    game3.countPoints();
+    ASSERT_EQ(game3.getPoints(),150);
+
+    Bowling game4(mixed);
+    game4.countPoints();
+    ASSERT_EQ(game4.getPoints(),158);
+}
 
 
 
