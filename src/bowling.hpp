@@ -16,6 +16,7 @@ public:
   int getPoints() const;
   void countBonuses();
   void countPoints();
+  bool good_sign(string token);
 private:
   vector<string> tokens;
   vector<int> bonuses;

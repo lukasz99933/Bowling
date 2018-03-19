@@ -23,6 +23,18 @@ vector<string> Bowling::getTokens() const
   return tokens;
 }
 
+bool Bowling::good_sign(string token)
+{
+    for(char sign : token)
+    {
+        if(sign!='X' && sign!='/' && sign!='-' && sign!='|' && !isdigit(sign))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool Bowling::validateTokens()
 {
     for(string token : tokens)
@@ -31,17 +43,12 @@ bool Bowling::validateTokens()
         {
             return false;
         }
-
-        for(char sign : token)
-        {
-            if(sign!='X' && sign!='/' && sign!='-' && sign!='|' && !isdigit(sign))
-            {
-                return false;
-            }
-        }
+	if(!good_sign(token))
+	{
+	    return false;
+	}
     }
-
-   return true;
+    return true;
 }
 
 
