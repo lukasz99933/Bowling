@@ -23,7 +23,7 @@ vector<string> Bowling::getTokens() const
   return tokens;
 }
 
-bool Bowling::good_sign(string token)
+bool Bowling::goodSign(string token)
 {
     for(char sign : token)
     {
@@ -43,7 +43,7 @@ bool Bowling::validateTokens()
         {
             return false;
         }
-	if(!good_sign(token))
+	if(!goodSign(token))
 	{
 	    return false;
 	}
@@ -116,22 +116,22 @@ void Bowling::countPoints()
             {
                 if(secondChar=='/')
                 {
-                    points += (int)10+(firstChar-48);
+                    points += (int)10+(firstChar-0);
                 }
                 else if(secondChar=='-')
                 {
-                    points += (int)firstChar-48;
+                    points += (int)firstChar-0;
                 }
                 else if(isdigit(secondChar))
                 {
-                    points += ((int)firstChar-48) + ((int)secondChar-48);
+                    points += ((int)firstChar-0) + ((int)secondChar-0);
                 }
             }
             else if(firstChar=='-')
             {
                 if(isdigit(secondChar))
                 {
-                    points += (int)secondChar-48;
+                    points += (int)secondChar-0;
                 }
             }
         }
