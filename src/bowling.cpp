@@ -116,7 +116,7 @@ void Bowling::countPoints()
             {
                 if(secondChar=='/')
                 {
-                    points += (int)10+(firstChar-'0');
+                    points += 10+(firstChar-'0');
                 }
                 else if(secondChar=='-')
                 {
