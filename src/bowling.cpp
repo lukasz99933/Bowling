@@ -116,22 +116,22 @@ void Bowling::countPoints()
             {
                 if(secondChar=='/')
                 {
-                    points += (int)10+(firstChar-0);
+                    points += (int)10+(firstChar-'0');
                 }
                 else if(secondChar=='-')
                 {
-                    points += (int)firstChar-0;
+                    points += (int)firstChar-'0';
                 }
                 else if(isdigit(secondChar))
                 {
-                    points += ((int)firstChar-0) + ((int)secondChar-0);
+                    points += ((int)firstChar-'0') + ((int)secondChar-'0');
                 }
             }
             else if(firstChar=='-')
             {
                 if(isdigit(secondChar))
                 {
-                    points += (int)secondChar-0;
+                    points += (int)secondChar-'0';
                 }
             }
         }
