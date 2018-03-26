@@ -21,6 +21,7 @@ private:
   vector<string> tokens;
   vector<int> bonuses;
   int points;
+  int countSeparatePoints(std::string token);  
 };
 
 int translateChar(const char ch);

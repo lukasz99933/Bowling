@@ -93,6 +93,39 @@ void Bowling::countBonuses()
   }
 }
 
+int Bowling::countSeparatePoints(std::string token)
+{
+	char firstChar = token[0];
+    char secondChar = token[1];
+	int points=0;
+    if(isdigit(firstChar))
+    {
+	    if(secondChar=='/')
+        {
+    	    points += 10+(firstChar-'0');
+        }
+        else if(secondChar=='-')
+        {
+       		 points += (int)firstChar-'0';
+        }
+        else if(isdigit(secondChar))
+        {
+        	points += ((int)firstChar-'0') + ((int)secondChar-'0');
+        }
+	}
+    else if(firstChar=='-')
+    {
+    	if(isdigit(secondChar))
+        {
+        	points += (int)secondChar-'0';
+        }
+    
+	}
+
+	return points;
+
+}
+
 void Bowling::countPoints()
 {
     auto tokens = getTokens();
@@ -109,31 +142,7 @@ void Bowling::countPoints()
         }
         else
         {
-            char firstChar = token[0];
-            char secondChar = token[1];
-
-            if(isdigit(firstChar))
-            {
-                if(secondChar=='/')
-                {
-                    points += 10+(firstChar-'0');
-                }
-                else if(secondChar=='-')
-                {
-                    points += (int)firstChar-'0';
-                }
-                else if(isdigit(secondChar))
-                {
-                    points += ((int)firstChar-'0') + ((int)secondChar-'0');
-                }
-            }
-            else if(firstChar=='-')
-            {
-                if(isdigit(secondChar))
-                {
-                    points += (int)secondChar-'0';
-                }
-            }
+			points += countSeparatePoints(token);
         }
     }
 
