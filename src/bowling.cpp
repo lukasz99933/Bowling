@@ -38,16 +38,8 @@ bool Bowling::goodSign(string token)
 bool Bowling::validateTokens()
 {
     for(string token : tokens)
-    {
-        if(token.size()>2 || token.size()==0)
-        {
+        if(token.size()>2 or token.size()==0 or !goodSign(token))
             return false;
-        }
-	if(!goodSign(token))
-	{
-	    return false;
-	}
-    }
     return true;
 }
 
@@ -63,91 +55,53 @@ int translateChar(const char ch)
 }
 
 
-vector<int> Bowling::getBonuses() const
+vector<int> Bowling::getExtras() const
 {
-  return bonuses;
+  return extras;
 }
 
-int Bowling::getPoints() const
-{
-  return points;
-}
 
-void Bowling::countBonuses()  
+void Bowling::countExtras()  
 {
   for (int i=0; i<10; i++) {
     if ((tokens.at(i).length() == 2) and (tokens.at(i)[1] == '/'))
-      bonuses.push_back(translateChar(tokens.at(i+1)[0]));
+      extras.push_back(translateChar(tokens.at(i+1)[0]));
     else if (tokens.at(i)[0] == 'X') {
        if (tokens.at(i+1).length() == 2) {
          if (tokens.at(i+1)[1] == '/')
-           bonuses.push_back(10);               
+           extras.push_back(10);               
          else
-           bonuses.push_back(translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]));               
+           extras.push_back(translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]));               
        }
        else if (tokens.at(i+1)[0] == 'X')
-           bonuses.push_back(10 + translateChar(tokens.at(i+2)[0]));                             
+           extras.push_back(10 + translateChar(tokens.at(i+2)[0]));                             
     }  
     else
-      bonuses.push_back(0);
+      extras.push_back(0);
   }
 }
 
+
 int Bowling::countSeparatePoints(std::string token)
 {
-	char firstChar = token[0];
-    char secondChar = token[1];
-	int points=0;
-    if(isdigit(firstChar))
-    {
-	    if(secondChar=='/')
-        {
-    	    points += 10+(firstChar-'0');
-        }
-        else if(secondChar=='-')
-        {
-       		 points += (int)firstChar-'0';
-        }
-        else if(isdigit(secondChar))
-        {
-        	points += ((int)firstChar-'0') + ((int)secondChar-'0');
-        }
-	}
-    else if(firstChar=='-')
-    {
-    	if(isdigit(secondChar))
-        {
-        	points += (int)secondChar-'0';
-        }
-    
-	}
-
-	return points;
-
+  if (token.length() == 1) {
+    return translateChar(token[0]);
+  }
+  else if (token[1] == '/') {
+    return 10;
+  }
+  else 
+    return translateChar(token[0]) + translateChar(token[1]);
 }
 
-void Bowling::countPoints()
+int Bowling::countScore()
 {
-    auto tokens = getTokens();
-    int countStrikes=0;
-    points=0;
-    for(int i=0;i<10;i++)
-    {
-        auto token = tokens.at(i);
 
-        if(token.compare("X")==0)
-        {
-            countStrikes++;
-            points+=20;
-        }
-        else
-        {
-			points += countSeparatePoints(token);
-        }
-    }
+    validateTokens();
+    countExtras();
+    int points=0;
+    for(int i=0; i<10; i++) 
+       points += countSeparatePoints(tokens[i]) + extras[i];
 
-    if(countStrikes==10)
-    {
-        points = 300;
-    }
+  return points;
 }
