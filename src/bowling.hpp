@@ -12,12 +12,15 @@ public:
   Bowling(const string& s);
   vector<string> getTokens() const;
   bool validateTokens();
-  int countPoints();
+  vector<int> getBonuses() const;
+  int getPoints() const;
+  void countBonuses();
+  void countPoints();
+  bool goodSign(string token);
 private:
   vector<string> tokens;
-  int countBonuses(vector<string> tokens);
-  bool goodSign(string token);
   vector<int> bonuses;
+  int points;
   int countSeparatePoints(std::string token);  
 };
 

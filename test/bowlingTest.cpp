@@ -167,7 +167,7 @@ TEST_F(bowlingTest, translate1)
 
 
 // test of bonuses:
-/*
+
 TEST_F(bowlingTest, noBonuses)
 {
   Bowling game1(perfectNoob);
@@ -239,20 +239,24 @@ TEST_F(bowlingTest, perfectBonus)
   ASSERT_EQ(bonuses1.at(1), 20);
   ASSERT_EQ(bonuses1.at(9), 20);
 }
-*/
+
 TEST_F(bowlingTest, countPoints)
 {
     Bowling game1(perfectScore);
-    ASSERT_EQ(game1.countPoints(),300);
+    game1.countPoints();
+    ASSERT_EQ(game1.getPoints(),300);
 
     Bowling game2(alwaysAlmostPerfect);
-    ASSERT_EQ(game2.countPoints(), 90);
+    game2.countPoints();
+    ASSERT_EQ(game2.getPoints(), 90);
 
     Bowling game3(twentyOneFives);
-    ASSERT_EQ(game3.countPoints(),150);
+    game3.countPoints();
+    ASSERT_EQ(game3.getPoints(),150);
 
     Bowling game4(mixed);
-    ASSERT_EQ(game4.countPoints(),167);
+    game4.countPoints();
+    ASSERT_EQ(game4.getPoints(),158);
 }
 
 
