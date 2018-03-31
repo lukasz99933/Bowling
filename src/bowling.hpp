@@ -10,16 +10,15 @@ class Bowling
 {
 public:
   Bowling(const string& s);
-  vector<string> getTokens() const;
+  vector<string> getTokens() const { return tokens; };
   bool validateTokens();
-  vector<int> getExtras() const;
-//  int getPoints() const;
-  void countExtras();
+//  vector<int> getExtras() const {  return extras; };
+  int countExtras();
   int countScore();
   bool goodSign(string token);
 private:
   vector<string> tokens;
-  vector<int> extras;
+//  vector<int> extras;
   int countSeparatePoints(std::string token);  
 };
 

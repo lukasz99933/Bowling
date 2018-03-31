@@ -170,75 +170,43 @@ TEST_F(bowlingTest, translate1)
 
 TEST_F(bowlingTest, noExtras)
 {
-  Bowling game1(perfectNoob);
-  game1.countExtras();
-  auto extras1 = game1.getExtras();
-  ASSERT_EQ(extras1.at(0), 0);
-  ASSERT_EQ(extras1.at(1), 0);
-  ASSERT_EQ(extras1.at(2), 0);
-  ASSERT_EQ(extras1.at(3), 0);
-  ASSERT_EQ(extras1.at(4), 0);
-  ASSERT_EQ(extras1.at(5), 0);
-  ASSERT_EQ(extras1.at(6), 0);
-  ASSERT_EQ(extras1.at(7), 0);
-  ASSERT_EQ(extras1.at(8), 0);
-  ASSERT_EQ(extras1.at(9), 0);
+  Bowling game(perfectNoob);
+  ASSERT_EQ(game.countExtras(), 0);
 }
 
 TEST_F(bowlingTest, extrasforFives)
 {
-  Bowling game1(twentyOneFives);
-  game1.countExtras();
-  auto extras1 = game1.getExtras();
-  ASSERT_EQ(extras1.at(0), 5);
-  ASSERT_EQ(extras1.at(1), 5);
-  ASSERT_EQ(extras1.at(2), 5);
-  ASSERT_EQ(extras1.at(3), 5);
-  ASSERT_EQ(extras1.at(4), 5);
-  ASSERT_EQ(extras1.at(5), 5);
-  ASSERT_EQ(extras1.at(6), 5);
-  ASSERT_EQ(extras1.at(7), 5);
-  ASSERT_EQ(extras1.at(8), 5);
-  ASSERT_EQ(extras1.at(9), 5);
+  Bowling game(twentyOneFives);
+  ASSERT_EQ(game.countExtras(), 50);
 }
 
 TEST_F(bowlingTest, doesExtraSum)
 {
-
-  Bowling game1("X|34|--|--|--|--|--|--|--|--||");
-  game1.countExtras();
-  auto extras1 = game1.getExtras();
-  ASSERT_EQ(extras1.at(0), 7);
+  Bowling game("X|34|--|--|--|--|--|--|--|--||");
+  ASSERT_EQ(game.countExtras(), 7);
 }
 
 
 TEST_F(bowlingTest, doesExtraCountSpare)
 {
-
-  Bowling game1("X|3/|--|--|--|--|--|--|--|--||");
-  game1.countExtras();
-  auto extras1 = game1.getExtras();
-  ASSERT_EQ(extras1.at(0), 10);
+  Bowling game("X|3/|--|--|--|--|--|--|--|--||");
+  ASSERT_EQ(game.countExtras(), 10);
 }
 
 TEST_F(bowlingTest, twoStrikesExtra)
 {
 
-  Bowling game1("X|X|23|--|--|--|--|--|--|--||");
-  game1.countExtras();
-  auto extras1 = game1.getExtras();
-  ASSERT_EQ(extras1.at(0), 12);
+  Bowling game("X|X|23|--|--|--|--|--|--|--||");
+  ASSERT_EQ(game.countExtras(), 17);
 }
 
 TEST_F(bowlingTest, perfectExtra)
 {
-  Bowling game1(perfectScore);
-  game1.countExtras();
-  auto extras1 = game1.getExtras();
-  ASSERT_EQ(extras1.at(0), 20);
-  ASSERT_EQ(extras1.at(1), 20);
-  ASSERT_EQ(extras1.at(9), 20);
+  Bowling game(perfectScore);
+  ASSERT_EQ(game.countExtras(), 200);
 }
+
+// test of total score:
 
 TEST_F(bowlingTest, countScore)
 {
@@ -263,6 +231,5 @@ TEST_F(bowlingTest, countScore)
     Bowling game7("X|34|--|--|--|--|--|--|--|--||");
     ASSERT_EQ(game7.countScore(),10+7 + 7);
 }
-
 
 

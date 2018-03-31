@@ -18,10 +18,6 @@ Bowling::Bowling(const string& s)
     tokens.erase(tokens.begin() + 10);
 }
 
-vector<string> Bowling::getTokens() const
-{
-  return tokens;
-}
 
 bool Bowling::goodSign(string token)
 {
@@ -55,30 +51,25 @@ int translateChar(const char ch)
 }
 
 
-vector<int> Bowling::getExtras() const
-{
-  return extras;
-}
 
-
-void Bowling::countExtras()  
+int Bowling::countExtras()  
 {
+  int result = 0;
   for (int i=0; i<10; i++) {
     if ((tokens.at(i).length() == 2) and (tokens.at(i)[1] == '/'))
-      extras.push_back(translateChar(tokens.at(i+1)[0]));
+      result += translateChar(tokens.at(i+1)[0]);
     else if (tokens.at(i)[0] == 'X') {
        if (tokens.at(i+1).length() == 2) {
          if (tokens.at(i+1)[1] == '/')
-           extras.push_back(10);               
+           result += 10;               
          else
-           extras.push_back(translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]));               
+           result += translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]);               
        }
        else if (tokens.at(i+1)[0] == 'X')
-           extras.push_back(10 + translateChar(tokens.at(i+2)[0]));                             
+           result += 10 + translateChar(tokens.at(i+2)[0]);                 
     }  
-    else
-      extras.push_back(0);
   }
+  return result;
 }
 
 
@@ -98,10 +89,9 @@ int Bowling::countScore()
 {
 
     validateTokens();
-    countExtras();
-    int points=0;
+    int points = countExtras();
     for(int i=0; i<10; i++) 
-       points += countSeparatePoints(tokens[i]) + extras[i];
+       points += countSeparatePoints(tokens[i]);
 
   return points;
 }
