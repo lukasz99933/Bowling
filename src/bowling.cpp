@@ -23,7 +23,7 @@ bool Bowling::goodSign(string token)
 {
     for(char sign : token)
     {
-        if(sign!='X' && sign!='/' && sign!='-' && sign!='|' && !isdigit(sign))
+        if(sign!='X' and sign!='/' and sign!='-' and sign!='|' and !isdigit(sign))
         {
             return false;
         }
@@ -50,17 +50,21 @@ int translateChar(const char ch)
   }
 }
 
+int Bowling::sumPair(const int i)
+{
+   if (tokens.at(i)[1] == '/')
+     return 10;               
+   else
+     return translateChar(tokens.at(i)[0]) + translateChar(tokens.at(i)[1]);                
+}
+
 int Bowling::countExtra(const int i)  
 {
     if ((tokens.at(i).length() == 2) and (tokens.at(i)[1] == '/'))
       return translateChar(tokens.at(i+1)[0]);
     else if (tokens.at(i)[0] == 'X') {
-       if (tokens.at(i+1).length() == 2) {
-         if (tokens.at(i+1)[1] == '/')
-           return 10;               
-         else
-           return translateChar(tokens.at(i+1)[0]) + translateChar(tokens.at(i+1)[1]);               
-       }
+       if (tokens.at(i+1).length() == 2) 
+           return sumPair(i+1);
        else if (tokens.at(i+1)[0] == 'X')
            return 10 + translateChar(tokens.at(i+2)[0]);                 
     }  
