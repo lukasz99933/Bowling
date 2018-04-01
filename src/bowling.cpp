@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Bowling::Bowling(const string& s)
+void Bowling::tokenize(const string& s)
 {
   string s0 = s;
   string::size_type pos;
@@ -16,6 +16,12 @@ Bowling::Bowling(const string& s)
   tokens.push_back(s0);
   if (tokens.size() > 11) 
     tokens.erase(tokens.begin() + 10);
+}
+
+
+Bowling::Bowling(const string& s)
+{
+  tokenize(s);
 }
 
 

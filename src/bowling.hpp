@@ -17,6 +17,7 @@ public:
 
 private:
   const int first = 0, last = 9;
+  void tokenize(const string& s);
   vector<string> tokens;
   int countSeparatePoints(const string& token);  
   int countStandardPoints();
