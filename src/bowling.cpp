@@ -48,10 +48,7 @@ int translateChar(const char ch)
 
 int Bowling::sumPair(const string& token)
 {
-   if (token[1] == '/')
-     return 10;               
-   else
-     return translateChar(token[0]) + translateChar(token[1]);                
+   return  token[1] == '/'  ?  10  :  translateChar(token[0]) + translateChar(token[1]);                
 }
 
 int Bowling::countExtra(const int i)  
@@ -76,11 +73,9 @@ int Bowling::countExtras()
 }
 
 
-int Bowling::countSeparatePoints(const std::string& token)
+int Bowling::countSeparatePoints(const std::string token)
 {
-  if (token.length() == 1) 
-    return translateChar(token[0]);
-  else return sumPair(token);
+  return  token.length() == 1  ?   translateChar(token[0])  :  sumPair(token);
 }
 
 int Bowling::countScore()

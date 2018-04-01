@@ -17,7 +17,7 @@ public:
 
 private:
   vector<string> tokens;
-  int countSeparatePoints(const std::string& token);  
+  int countSeparatePoints(const std::string token);  
   int sumPair(const string& token);
   int countExtra(const int i);
   bool goodSign(const string& token);
