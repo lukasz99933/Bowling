@@ -17,10 +17,10 @@ public:
 
 private:
   vector<string> tokens;
-  int countSeparatePoints(std::string token);  
-  int sumPair(const int i);
+  int countSeparatePoints(const std::string& token);  
+  int sumPair(const string& token);
   int countExtra(const int i);
-  bool goodSign(string token);
+  bool goodSign(const string& token);
 };
 
 int translateChar(const char ch);
