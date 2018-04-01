@@ -95,8 +95,8 @@ int Bowling::countExtras()
   for(int i = first; i <= last; i++) 
     extraPoints += countExtra(i);
   return extraPoints;
-}  
-//
+}
+
 
 int Bowling::countSeparatePoints(const string& token)
 {
@@ -105,7 +105,7 @@ int Bowling::countSeparatePoints(const string& token)
 
 int Bowling::countStandardPoints()
 {  
-  int points = 0;  
+  int points = 0;
   for(int i = first; i <= last; i++) 
     points += countSeparatePoints(tokens[i]);
   return points;

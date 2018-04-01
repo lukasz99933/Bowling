@@ -6,7 +6,7 @@
 using namespace std;
 
 
-class Bowling 
+class Bowling  
 {
 public:
   Bowling(const string& s);
