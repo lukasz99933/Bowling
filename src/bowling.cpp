@@ -22,7 +22,7 @@ Bowling::Bowling(const string& s)
 bool Bowling::goodSign(const string& token)
 {
     for(char sign : token)
-        if(sign!='X' and sign!='/' and sign!='-' and sign!='|' and !isdigit(sign))
+        if (sign!='X' and sign!='/' and sign!='-' and sign!='|' and !isdigit(sign))
             return false;
     return true;
 }
@@ -30,7 +30,7 @@ bool Bowling::goodSign(const string& token)
 bool Bowling::validateTokens()
 {
     for(string token : tokens)
-        if(token.size()>2 or token.size()==0 or !goodSign(token))
+        if (token.size()>2 or token.size()==0 or !goodSign(token) or (token.size()==2 and sumPair(token)>10))
             return false;
     return true;
 }
@@ -73,16 +73,21 @@ int Bowling::countExtras()
 }
 
 
-int Bowling::countSeparatePoints(const std::string token)
+int Bowling::countSeparatePoints(const string& token)
 {
   return  token.length() == 1  ?   10  :  sumPair(token);
+}
+
+int Bowling::countStandardPoints()
+{  
+  int points;
+  for(int i = first; i <= last; i++) 
+    points += countSeparatePoints(tokens[i]);
+  return points;
 }
 
 int Bowling::countScore()
 {
   validateTokens();
-  int points = countExtras();
-  for(int i = first; i <= last; i++) 
-    points += countSeparatePoints(tokens[i]);
-  return points;
+  return countStandardPoints() + countExtras();
 }

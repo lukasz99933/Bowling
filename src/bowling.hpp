@@ -18,7 +18,8 @@ public:
 private:
   const int first = 0, last = 9;
   vector<string> tokens;
-  int countSeparatePoints(const std::string token);  
+  int countSeparatePoints(const string& token);  
+  int countStandardPoints();
   int sumPair(const string& token);
   int countExtra(const int i);
   bool goodSign(const string& token);

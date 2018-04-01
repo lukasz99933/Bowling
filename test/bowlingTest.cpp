@@ -124,9 +124,15 @@ TEST_F(bowlingTest, _5slashTokens)
 
 // tests of validateTokens method:
 
-TEST_F(bowlingTest, validationToMuchSigns)
+TEST_F(bowlingTest, validationTooMuchSigns)
 {
     Bowling game("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
+    ASSERT_FALSE(game.validateTokens());
+}
+
+TEST_F(bowlingTest, validationTooMuchDigits)
+{
+    Bowling game("99|X|X|X|X|X|X|X|X|X||XX");
     ASSERT_FALSE(game.validateTokens());
 }
 
