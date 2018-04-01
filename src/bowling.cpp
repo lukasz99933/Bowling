@@ -58,7 +58,7 @@ int Bowling::countExtra(const int i)
   else if (tokens.at(i)[0] == 'X') {
       if (tokens.at(i+1).length() == 2) 
           return sumPair(tokens.at(i+1));
-      else if (tokens.at(i+1)[0] == 'X')
+      else 
           return 10 + translateChar(tokens.at(i+2)[0]);                 
   }  
   return 0;
@@ -67,7 +67,7 @@ int Bowling::countExtra(const int i)
 int Bowling::countExtras()  
 {
   int result = 0;
-  for (int i=0; i<10; i++) 
+  for(int i = first; i <= last; i++) 
     result += countExtra(i);
   return result;
 }
@@ -75,14 +75,14 @@ int Bowling::countExtras()
 
 int Bowling::countSeparatePoints(const std::string token)
 {
-  return  token.length() == 1  ?   translateChar(token[0])  :  sumPair(token);
+  return  token.length() == 1  ?   10  :  sumPair(token);
 }
 
 int Bowling::countScore()
 {
   validateTokens();
   int points = countExtras();
-  for(int i=0; i<10; i++) 
+  for(int i = first; i <= last; i++) 
     points += countSeparatePoints(tokens[i]);
   return points;
 }

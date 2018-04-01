@@ -16,6 +16,7 @@ public:
   int countScore();
 
 private:
+  const int first = 0, last = 9;
   vector<string> tokens;
   int countSeparatePoints(const std::string token);  
   int sumPair(const string& token);
