@@ -75,6 +75,9 @@ TEST_F(bowlingTest, xsTokens)
 {
   Bowling game(perfectScore);  
   auto tokens = game.getTokens();
+//checks that vector v is {5, 10, 15}
+//  ASSERT_THAT(tokens, ELementsAre("1","2"))
+//  EXPECT_THAT(tokens, ElementsAre("X","X","X","X","X","X","X","X","X","X","XX"));
   ASSERT_EQ(tokens.at(0), "X");
   ASSERT_EQ(tokens.at(1), "X");
   ASSERT_EQ(tokens.at(2), "X");
@@ -124,16 +127,16 @@ TEST_F(bowlingTest, _5slashTokens)
 
 // tests of validateTokens method:
 
-TEST_F(bowlingTest, validationTooMuchSigns)
+TEST_F(bowlingTest, validationTooManySigns)
 {
     Bowling game("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
     ASSERT_FALSE(game.validateTokens());
 }
 
-TEST_F(bowlingTest, validationTooMuchDigits)
+TEST_F(bowlingTest, validationTooManyDigits)
 {
-    Bowling game("99|X|X|X|X|X|X|X|X|X||XX");
-    ASSERT_FALSE(game.validateTokens());
+    Bowling game1("99|X|X|X|X|X|X|X|X|X||XX");
+    ASSERT_FALSE(game1.validateTokens());
 }
 
 TEST_F(bowlingTest, validationNotCorrectSigns)
@@ -148,7 +151,7 @@ TEST_F(bowlingTest, validationNotCorrectSigns)
     ASSERT_TRUE(game3.validateTokens());
 }
 
-TEST_F(bowlingTest, validationTooLessSigns)
+TEST_F(bowlingTest, validationTooFewSigns)
 {
     Bowling game1("|||X||81");
     ASSERT_FALSE(game1.validateTokens());

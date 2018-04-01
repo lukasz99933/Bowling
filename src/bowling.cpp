@@ -22,15 +22,21 @@ Bowling::Bowling(const string& s)
 bool Bowling::goodSign(const string& token)
 {
     for(char sign : token)
-        if (sign!='X' and sign!='/' and sign!='-' and sign!='|' and !isdigit(sign))
+        if (sign!='X' and sign!='/' and sign!='-' and sign!='|' and not isdigit(sign))
             return false;
     return true;
 }
 
+bool isTokenSizeIncorrect(const string& token)
+{
+  return token.size() > 2 or token.size() == 0 ;
+}
+
+
 bool Bowling::validateTokens()
 {
     for(string token : tokens)
-        if (token.size()>2 or token.size()==0 or !goodSign(token) or (token.size()==2 and sumPair(token)>10))
+        if (isTokenSizeIncorrect(token) or not goodSign(token) or (token.size()==2 and sumAPair(token)>10))
             return false;
     return true;
 }
@@ -46,18 +52,30 @@ int translateChar(const char ch)
   }
 }
 
-int Bowling::sumPair(const string& token)
+bool isStrike(const string& token)
 {
-   return  token[1] == '/'  ?  10  :  translateChar(token[0]) + translateChar(token[1]);                
+  return token[0] == 'X';
 }
+
+bool isSpare(const string& token)
+{
+  return token.length() == 2 and token[1] == '/';
+}
+
+
+int Bowling::sumAPair(const string& token)
+{
+   return  isSpare(token)  ?  10  :  translateChar(token[0]) + translateChar(token[1]);                
+}
+
 
 int Bowling::countExtra(const int i)  
 {
-  if ((tokens.at(i).length() == 2) and (tokens.at(i)[1] == '/'))
+  if (isSpare(tokens.at(i)))
       return translateChar(tokens.at(i+1)[0]);
-  else if (tokens.at(i)[0] == 'X') {
+  else if (isStrike(tokens.at(i))) {
       if (tokens.at(i+1).length() == 2) 
-          return sumPair(tokens.at(i+1));
+          return sumAPair(tokens.at(i+1));
       else 
           return 10 + translateChar(tokens.at(i+2)[0]);                 
   }  
@@ -66,16 +84,16 @@ int Bowling::countExtra(const int i)
 
 int Bowling::countExtras()  
 {
-  int result = 0;
+  int extraPoints = 0;
   for(int i = first; i <= last; i++) 
-    result += countExtra(i);
-  return result;
+    extraPoints += countExtra(i);
+  return extraPoints;
 }
 
 
 int Bowling::countSeparatePoints(const string& token)
 {
-  return  token.length() == 1  ?   10  :  sumPair(token);
+  return  token.length() == 1  ?   10  :  sumAPair(token);
 }
 
 int Bowling::countStandardPoints()

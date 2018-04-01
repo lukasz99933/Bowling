@@ -20,7 +20,7 @@ private:
   vector<string> tokens;
   int countSeparatePoints(const string& token);  
   int countStandardPoints();
-  int sumPair(const string& token);
+  int sumAPair(const string& token);
   int countExtra(const int i);
   bool goodSign(const string& token);
 };
