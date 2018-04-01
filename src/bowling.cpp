@@ -75,16 +75,17 @@ int Bowling::sumAPair(const string& token)
 }
 
 
+int Bowling::scoreFor2Balls(const int i)
+{
+  return tokens.at(i).length() == 2  ?  sumAPair(tokens.at(i))  :  10 + translateChar(tokens.at(i+1)[0]); 
+}
+
 int Bowling::countExtra(const int i)  
 {
   if (isSpare(tokens.at(i)))
-      return translateChar(tokens.at(i+1)[0]);
-  else if (isStrike(tokens.at(i))) {
-      if (tokens.at(i+1).length() == 2) 
-          return sumAPair(tokens.at(i+1));
-      else 
-          return 10 + translateChar(tokens.at(i+2)[0]);                 
-  }  
+    return translateChar(tokens.at(i+1)[0]);
+  else if (isStrike(tokens.at(i))) 
+    return scoreFor2Balls(i+1);
   return 0;
 }
 
