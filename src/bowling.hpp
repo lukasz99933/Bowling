@@ -16,7 +16,6 @@ public:
   int countScore();
 
 private:
-  const int first = 0, last = 9;
   void frameize(const string& s);
   vector<string> frames;
   bool validateFrame(const string& frame);

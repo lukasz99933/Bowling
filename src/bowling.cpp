@@ -47,7 +47,6 @@ bool Bowling::validateFrames()
     return true;
 }
 
-
 int translateChar(const char ch)
 {
   switch(ch) {
@@ -83,10 +82,17 @@ int Bowling::countExtra(const int i)
   return 0; 
 }
 
-int Bowling::countExtras()  
+auto butLast(const vector<string>& v)
 {
+  auto v1(v);
+  v1.pop_back();
+  return v1;
+}
+
+int Bowling::countExtras()  
+{  
   int extraScore = 0;
-  for(int i = first; i <= last; i++) 
+  for(vector<string>::size_type i = 0; i < frames.size() - 1; i++)
     extraScore += countExtra(i);
   return extraScore;
 }  
@@ -103,11 +109,12 @@ int Bowling::countSeparateScore(const string& frame)
   return  frame.length() == 1  ?   10  :  sumAPair(frame);
 }
 
+
 int Bowling::countStandardScore()
 {  
   int score = 0;  
-  for(int i = first; i <= last; i++) 
-    score += countSeparateScore(frames[i]);
+  for(auto frame: butLast(frames)) 
+    score += countSeparateScore(frame);
   return score;
 }
 
