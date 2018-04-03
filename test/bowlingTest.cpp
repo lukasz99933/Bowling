@@ -75,9 +75,6 @@ TEST_F(bowlingTest, xsFrames)
 {
   Bowling game(perfectScore);  
   auto frames = game.getFrames();
-//checks that vector v is {5, 10, 15}
-//  ASSERT_THAT(frames, ELementsAre("1","2"))
-//  EXPECT_THAT(frames, ElementsAre("X","X","X","X","X","X","X","X","X","X","XX"));
   ASSERT_EQ(frames.at(0), "X");
   ASSERT_EQ(frames.at(1), "X");
   ASSERT_EQ(frames.at(2), "X");

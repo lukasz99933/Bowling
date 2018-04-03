@@ -69,12 +69,6 @@ bool hasSpare(const string& frame)
 }
 
 
-int Bowling::sumAPair(const string& frame)
-{
-   return  hasSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
-}
-
-
 int Bowling::scoreFor2Balls(const int i)
 {
   return frames.at(i).length() == 2  ?  sumAPair(frames.at(i))  :  10 + translateChar(frames.at(i+1)[0]); 
@@ -96,7 +90,13 @@ int Bowling::countExtras()
     extraScore += countExtra(i);
   return extraScore;
 }  
-//
+
+
+int Bowling::sumAPair(const string& frame)
+{
+   return  hasSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
+}
+
 
 int Bowling::countSeparateScore(const string& frame)
 {
