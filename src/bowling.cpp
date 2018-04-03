@@ -25,12 +25,17 @@ Bowling::Bowling(const string& s)
 }
 
 
-bool Bowling::goodSign(const string& frame)
+bool Bowling::correctSign(const char sign)
 {
-    for(char sign : frame)
-        if (sign!=miss and sign!=spare and sign!=strike and sign!=separator and not isdigit(sign))
-            return false;
-    return true;
+  return sign!=miss and sign!=spare and sign!=strike and sign!=separator and not isdigit(sign) ;
+}
+
+bool Bowling::correctSigns(const string& frame)
+{
+  for(char sign : frame)
+     if (correctSign(sign))
+        return false;
+  return true;
 }
 
 bool isFrameSizeIncorrect(const string& frame)
@@ -38,13 +43,19 @@ bool isFrameSizeIncorrect(const string& frame)
   return frame.size() > 2 or frame.size() == 0 ;
 }
 
+auto butLast(const vector<string>& v)
+{
+  auto result(v);
+  result.pop_back();
+  return result;
+}
 
 bool Bowling::validateFrames()
 {
-    for(string frame : frames)
-        if (isFrameSizeIncorrect(frame) or not goodSign(frame) or (frame.size()==2 and sumAPair(frame)>10))
+    for(string frame : butLast(frames))
+        if (isFrameSizeIncorrect(frame) or not correctSigns(frame) or (frame.size()==2 and sumAPair(frame)>10))
             return false;
-    return true;
+    return (correctSigns(frames.back()));
 }
 
 int Bowling::translateChar(const char ch)
@@ -82,13 +93,6 @@ int Bowling::countExtra(const int i)
   return 0; 
 }
 
-auto butLast(const vector<string>& v)
-{
-  auto v1(v);
-  v1.pop_back();
-  return v1;
-}
-
 int Bowling::countExtras()  
 {  
   int extraScore = 0;
@@ -120,6 +124,8 @@ int Bowling::countStandardScore()
 
 int Bowling::countScore()
 {
-  validateFrames();
-  return countStandardScore() + countExtras();
+  if (validateFrames())
+     return countStandardScore() + countExtras();
+  else 
+     return -1;
 }
