@@ -164,11 +164,12 @@ TEST_F(bowlingTest, validationTooFewSigns)
 
 TEST_F(bowlingTest, translate1)
 {
-  ASSERT_EQ(translateChar('1'), 1);
-  ASSERT_EQ(translateChar('2'), 2);
-  ASSERT_EQ(translateChar('X'), 10);
-  ASSERT_EQ(translateChar('-'), 0);
-  ASSERT_EQ(translateChar('/'), 0);  // temporary
+  Bowling game("");
+  ASSERT_EQ(game.translateChar('1'), 1);
+  ASSERT_EQ(game.translateChar('2'), 2);
+  ASSERT_EQ(game.translateChar('X'), 10);
+  ASSERT_EQ(game.translateChar('-'), 0);
+  ASSERT_EQ(game.translateChar('/'), 0);  
 }
 
 

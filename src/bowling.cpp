@@ -9,7 +9,7 @@ void Bowling::frameize(const string& s)
 {
   string s0 = s;
   string::size_type pos;
-  while ((pos = s0.find("|")) != string::npos) {  
+  while ((pos = s0.find(separator)) != string::npos) {  
     frames.push_back(s0.substr(0,pos));
     s0 = s0.substr(pos+1, s0.length());  
   }
@@ -28,7 +28,7 @@ Bowling::Bowling(const string& s)
 bool Bowling::goodSign(const string& frame)
 {
     for(char sign : frame)
-        if (sign!='X' and sign!='/' and sign!='-' and sign!='|' and not isdigit(sign))
+        if (sign!=miss and sign!=spare and sign!=strike and sign!=separator and not isdigit(sign))
             return false;
     return true;
 }
@@ -47,24 +47,24 @@ bool Bowling::validateFrames()
     return true;
 }
 
-int translateChar(const char ch)
+int Bowling::translateChar(const char ch)
 {
-  switch(ch) {
-    case 'X': return 10;
-    case '-': return 0;
-    case '/': return 0;
-    default : return ch - '0';
-  }
+  if (ch==miss or ch==spare)
+    return 0;
+  else if (ch==strike)
+    return 10;
+  else
+    return ch - '0';
 }
 
-bool hasStrike(const string& frame)
+bool Bowling::hasStrike(const string& frame)
 {
-  return frame[0] == 'X';
+  return frame[0] == strike;
 }
 
-bool hasSpare(const string& frame)
+bool Bowling::hasSpare(const string& frame)
 {
-  return frame.length() == 2 and frame[1] == '/';
+  return frame.length() == 2 and frame[1] == spare;
 }
 
 

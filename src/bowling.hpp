@@ -14,8 +14,14 @@ public:
   bool validateFrames();  
   int countExtras(); //public for tests only
   int countScore();
+  int translateChar(const char ch); //public for tests only
 
 private:
+  const char miss   = '-';
+  const char spare  = '/';
+  const char strike = 'X';
+  const char separator = '|';
+
   void frameize(const string& s);
   vector<string> frames;
   bool validateFrame(const string& frame);
@@ -25,7 +31,10 @@ private:
   int sumAPair(const string& frame);
   int countExtra(const int i);
   bool goodSign(const string& frame);
+
+  bool hasSpare(const string& frame);
+  bool hasStrike(const string& frame);
+
 };
 
-int translateChar(const char ch);
 
