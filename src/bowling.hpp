@@ -20,8 +20,8 @@ private:
   void frameize(const string& s);
   vector<string> frames;
   int scoreFor2Balls(const int i);
-  int countSeparatePoints(const string& frame);  
-  int countStandardPoints();
+  int countSeparateScore(const string& frame);  
+  int countStandardScore();
   int sumAPair(const string& frame);
   int countExtra(const int i);
   bool goodSign(const string& frame);

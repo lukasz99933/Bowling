@@ -91,28 +91,28 @@ int Bowling::countExtra(const int i)
 
 int Bowling::countExtras()  
 {
-  int extraPoints = 0;
+  int extraScore = 0;
   for(int i = first; i <= last; i++) 
-    extraPoints += countExtra(i);
-  return extraPoints;
+    extraScore += countExtra(i);
+  return extraScore;
 }  
 //
 
-int Bowling::countSeparatePoints(const string& frame)
+int Bowling::countSeparateScore(const string& frame)
 {
   return  frame.length() == 1  ?   10  :  sumAPair(frame);
 }
 
-int Bowling::countStandardPoints()
+int Bowling::countStandardScore()
 {  
-  int points = 0;  
+  int score = 0;  
   for(int i = first; i <= last; i++) 
-    points += countSeparatePoints(frames[i]);
-  return points;
+    score += countSeparateScore(frames[i]);
+  return score;
 }
 
 int Bowling::countScore()
 {
   validateFrames();
-  return countStandardPoints() + countExtras();
+  return countStandardScore() + countExtras();
 }
