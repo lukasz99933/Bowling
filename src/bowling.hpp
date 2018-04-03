@@ -10,21 +10,21 @@ class Bowling
 {
 public:
   Bowling(const string& s);
-  vector<string> getTokens() const { return tokens; };  //public for tests only
-  bool validateTokens();  
+  vector<string> getFrames() const { return frames; };  //public for tests only
+  bool validateFrames();  
   int countExtras(); //public for tests only
   int countScore();
 
 private:
   const int first = 0, last = 9;
-  void tokenize(const string& s);
-  vector<string> tokens;
+  void frameize(const string& s);
+  vector<string> frames;
   int scoreFor2Balls(const int i);
-  int countSeparatePoints(const string& token);  
+  int countSeparatePoints(const string& frame);  
   int countStandardPoints();
-  int sumAPair(const string& token);
+  int sumAPair(const string& frame);
   int countExtra(const int i);
-  bool goodSign(const string& token);
+  bool goodSign(const string& frame);
 };
 
 int translateChar(const char ch);

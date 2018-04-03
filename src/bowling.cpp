@@ -5,44 +5,44 @@
 
 using namespace std;
 
-void Bowling::tokenize(const string& s)
+void Bowling::frameize(const string& s)
 {
   string s0 = s;
   string::size_type pos;
   while ((pos = s0.find("|")) != string::npos) {  
-    tokens.push_back(s0.substr(0,pos));
+    frames.push_back(s0.substr(0,pos));
     s0 = s0.substr(pos+1, s0.length());  
   }
-  tokens.push_back(s0);
-  if (tokens.size() > 11) 
-    tokens.erase(tokens.begin() + 10);
+  frames.push_back(s0);
+  if (frames.size() > 11) 
+    frames.erase(frames.begin() + 10);
 }
 
 
 Bowling::Bowling(const string& s)
 {
-  tokenize(s);
+  frameize(s);
 }
 
 
-bool Bowling::goodSign(const string& token)
+bool Bowling::goodSign(const string& frame)
 {
-    for(char sign : token)
+    for(char sign : frame)
         if (sign!='X' and sign!='/' and sign!='-' and sign!='|' and not isdigit(sign))
             return false;
     return true;
 }
 
-bool isTokenSizeIncorrect(const string& token)
+bool isFrameSizeIncorrect(const string& frame)
 {
-  return token.size() > 2 or token.size() == 0 ;
+  return frame.size() > 2 or frame.size() == 0 ;
 }
 
 
-bool Bowling::validateTokens()
+bool Bowling::validateFrames()
 {
-    for(string token : tokens)
-        if (isTokenSizeIncorrect(token) or not goodSign(token) or (token.size()==2 and sumAPair(token)>10))
+    for(string frame : frames)
+        if (isFrameSizeIncorrect(frame) or not goodSign(frame) or (frame.size()==2 and sumAPair(frame)>10))
             return false;
     return true;
 }
@@ -58,33 +58,33 @@ int translateChar(const char ch)
   }
 }
 
-bool isStrike(const string& token)
+bool isStrike(const string& frame)
 {
-  return token[0] == 'X';
+  return frame[0] == 'X';
 }
 
-bool isSpare(const string& token)
+bool isSpare(const string& frame)
 {
-  return token.length() == 2 and token[1] == '/';
+  return frame.length() == 2 and frame[1] == '/';
 }
 
 
-int Bowling::sumAPair(const string& token)
+int Bowling::sumAPair(const string& frame)
 {
-   return  isSpare(token)  ?  10  :  translateChar(token[0]) + translateChar(token[1]);                
+   return  isSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
 }
 
 
 int Bowling::scoreFor2Balls(const int i)
 {
-  return tokens.at(i).length() == 2  ?  sumAPair(tokens.at(i))  :  10 + translateChar(tokens.at(i+1)[0]); 
+  return frames.at(i).length() == 2  ?  sumAPair(frames.at(i))  :  10 + translateChar(frames.at(i+1)[0]); 
 }
 
 int Bowling::countExtra(const int i)  
 {
-  if (isSpare(tokens.at(i)))
-    return translateChar(tokens.at(i+1)[0]);
-  else if (isStrike(tokens.at(i))) 
+  if (isSpare(frames.at(i)))
+    return translateChar(frames.at(i+1)[0]);
+  else if (isStrike(frames.at(i))) 
     return scoreFor2Balls(i+1);
   return 0; 
 }
@@ -98,21 +98,21 @@ int Bowling::countExtras()
 }  
 //
 
-int Bowling::countSeparatePoints(const string& token)
+int Bowling::countSeparatePoints(const string& frame)
 {
-  return  token.length() == 1  ?   10  :  sumAPair(token);
+  return  frame.length() == 1  ?   10  :  sumAPair(frame);
 }
 
 int Bowling::countStandardPoints()
 {  
   int points = 0;  
   for(int i = first; i <= last; i++) 
-    points += countSeparatePoints(tokens[i]);
+    points += countSeparatePoints(frames[i]);
   return points;
 }
 
 int Bowling::countScore()
 {
-  validateTokens();
+  validateFrames();
   return countStandardPoints() + countExtras();
 }
