@@ -58,12 +58,12 @@ int translateChar(const char ch)
   }
 }
 
-bool isStrike(const string& frame)
+bool hasStrike(const string& frame)
 {
   return frame[0] == 'X';
 }
 
-bool isSpare(const string& frame)
+bool hasSpare(const string& frame)
 {
   return frame.length() == 2 and frame[1] == '/';
 }
@@ -71,7 +71,7 @@ bool isSpare(const string& frame)
 
 int Bowling::sumAPair(const string& frame)
 {
-   return  isSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
+   return  hasSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
 }
 
 
@@ -82,9 +82,9 @@ int Bowling::scoreFor2Balls(const int i)
 
 int Bowling::countExtra(const int i)  
 {
-  if (isSpare(frames.at(i)))
+  if (hasSpare(frames.at(i)))
     return translateChar(frames.at(i+1)[0]);
-  else if (isStrike(frames.at(i))) 
+  else if (hasStrike(frames.at(i))) 
     return scoreFor2Balls(i+1);
   return 0; 
 }

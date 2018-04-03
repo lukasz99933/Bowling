@@ -10,7 +10,7 @@ class Bowling
 {
 public:
   Bowling(const string& s);
-  vector<string> getFrames() const { return frames; };  //public for tests only
+  auto getFrames() const { return frames; };  //public for tests only
   bool validateFrames();  
   int countExtras(); //public for tests only
   int countScore();
@@ -19,6 +19,7 @@ private:
   const int first = 0, last = 9;
   void frameize(const string& s);
   vector<string> frames;
+  bool validateFrame(const string& frame);
   int scoreFor2Balls(const int i);
   int countSeparateScore(const string& frame);  
   int countStandardScore();
