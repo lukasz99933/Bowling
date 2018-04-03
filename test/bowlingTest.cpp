@@ -239,4 +239,10 @@ TEST_F(bowlingTest, countScore)
     ASSERT_EQ(game7.countScore(),10+7 + 7);
 }
 
+TEST_F(bowlingTest, incorrectData)
+{
+    Bowling game1("111|--|--|--|--|--|--|--|--|--||");
+    ASSERT_EQ(game1.countScore(),-1);
+}
+
 
