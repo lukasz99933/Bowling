@@ -243,6 +243,9 @@ TEST_F(bowlingTest, incorrectData)
 {
     Bowling game1("111|--|--|--|--|--|--|--|--|--||");
     ASSERT_EQ(game1.countScore(),-1);
+
+    Bowling game2("0-|--|--|--|--|--|--|--|--|--||");
+    ASSERT_EQ(game2.countScore(),-1);
 }
 
 

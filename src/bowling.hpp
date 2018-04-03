@@ -24,13 +24,14 @@ private:
 
   void frameize(const string& s);
   vector<string> frames;
+  string bonus() const {return frames.back();};
   bool validateFrame(const string& frame);
   int scoreFor2Balls(const int i);
   int countSeparateScore(const string& frame);  
   int countStandardScore();
   int sumAPair(const string& frame);
   int countExtra(const int i);
-  bool correctSign(const char sign);
+  bool incorrectSign(const char sign);
   bool correctSigns(const string& frame);
 
   bool hasSpare(const string& frame);

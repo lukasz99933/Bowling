@@ -25,15 +25,15 @@ Bowling::Bowling(const string& s)
 }
 
 
-bool Bowling::correctSign(const char sign)
+bool Bowling::incorrectSign(const char sign)
 {
-  return sign!=miss and sign!=spare and sign!=strike and sign!=separator and not isdigit(sign) ;
+  return (sign!=miss and sign!=spare and sign!=strike and sign!=separator and not isdigit(sign)) or sign=='0' ;
 }
 
 bool Bowling::correctSigns(const string& frame)
 {
   for(char sign : frame)
-     if (correctSign(sign))
+     if (incorrectSign(sign))
         return false;
   return true;
 }
@@ -55,7 +55,7 @@ bool Bowling::validateFrames()
     for(string frame : butLast(frames))
         if (isFrameSizeIncorrect(frame) or not correctSigns(frame) or (frame.size()==2 and sumAPair(frame)>10))
             return false;
-    return (correctSigns(frames.back()));
+    return (correctSigns(bonus())); 
 }
 
 int Bowling::translateChar(const char ch)
