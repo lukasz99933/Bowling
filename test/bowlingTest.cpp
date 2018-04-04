@@ -124,7 +124,7 @@ TEST_F(bowlingTest, _5slashFrames)
 
 // tests of validateFrames method:
 
-TEST_F(bowlingTest, validationTooManySigns)
+TEST_F(bowlingTest, validationTooManySymbols)
 {
     Bowling game("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
     ASSERT_FALSE(game.validateFrames());
@@ -136,7 +136,7 @@ TEST_F(bowlingTest, validationTooManyDigits)
     ASSERT_FALSE(game1.validateFrames());
 }
 
-TEST_F(bowlingTest, validationNotCorrectSigns)
+TEST_F(bowlingTest, validationNotCorrectSymbols)
 {
     Bowling game1("a||X|123456");
     ASSERT_FALSE(game1.validateFrames());
@@ -148,7 +148,7 @@ TEST_F(bowlingTest, validationNotCorrectSigns)
     ASSERT_TRUE(game3.validateFrames());
 }
 
-TEST_F(bowlingTest, validationTooFewSigns)
+TEST_F(bowlingTest, validationTooFewSymbols)
 {
     Bowling game1("|||X||81");
     ASSERT_FALSE(game1.validateFrames());

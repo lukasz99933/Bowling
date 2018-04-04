@@ -25,15 +25,15 @@ Bowling::Bowling(const string& s)
 }
 
 
-bool Bowling::incorrectSign(const char sign)
+bool Bowling::correctSymbol(const char symbol)
 {
-  return (sign!=miss and sign!=spare and sign!=strike and sign!=separator and not isdigit(sign)) or sign=='0' ;
+  return symbol==miss or symbol==spare or symbol==strike or symbol==separator or (isdigit(symbol) and symbol!='0') ;
 }
 
-bool Bowling::correctSigns(const string& frame)
+bool Bowling::correctSymbols(const string& frame)
 {
-  for(char sign : frame)
-     if (incorrectSign(sign))
+  for(char symbol : frame)
+     if (not correctSymbol(symbol))
         return false;
   return true;
 }
@@ -53,9 +53,9 @@ auto butLast(const vector<string>& v)
 bool Bowling::validateFrames()
 {
     for(string frame : butLast(frames))
-        if (isFrameSizeIncorrect(frame) or not correctSigns(frame) or (frame.size()==2 and sumAPair(frame)>10))
+        if (isFrameSizeIncorrect(frame) or not correctSymbols(frame) or (frame.size()==2 and sumAPair(frame)>10))
             return false;
-    return (correctSigns(bonus())); 
+    return (correctSymbols(bonus())); 
 }
 
 int Bowling::translateChar(const char ch)

@@ -31,8 +31,8 @@ private:
   int countStandardScore();
   int sumAPair(const string& frame);
   int countExtra(const int i);
-  bool incorrectSign(const char sign);
-  bool correctSigns(const string& frame);
+  bool correctSymbol(const char symbol);
+  bool correctSymbols(const string& frame);
 
   bool hasSpare(const string& frame);
   bool hasStrike(const string& frame);
