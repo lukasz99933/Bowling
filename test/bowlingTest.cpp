@@ -57,69 +57,28 @@ TEST_F(bowlingTest, threeFrames)
 TEST_F(bowlingTest, mixedFrames)
 {
   Bowling game(mixed);  
-  auto frames = game.getFrames();
-  ASSERT_EQ(frames.at(0), "X");
-  ASSERT_EQ(frames.at(1), "7/");
-  ASSERT_EQ(frames.at(2), "9-");
-  ASSERT_EQ(frames.at(3), "X");
-  ASSERT_EQ(frames.at(4), "-8");
-  ASSERT_EQ(frames.at(5), "8/");
-  ASSERT_EQ(frames.at(6), "-6");
-  ASSERT_EQ(frames.at(7), "X");
-  ASSERT_EQ(frames.at(8), "X");
-  ASSERT_EQ(frames.at(9), "X");
-  ASSERT_EQ(frames.at(10), "81");
+  const vector<string> v = {"X","7/","9-","X","-8","8/","-6","X","X","X","81"};
+  ASSERT_EQ(game.getFrames(), v);
 }
 
 TEST_F(bowlingTest, xsFrames)
 {
   Bowling game(perfectScore);  
-  auto frames = game.getFrames();
-  ASSERT_EQ(frames.at(0), "X");
-  ASSERT_EQ(frames.at(1), "X");
-  ASSERT_EQ(frames.at(2), "X");
-  ASSERT_EQ(frames.at(3), "X");
-  ASSERT_EQ(frames.at(4), "X");
-  ASSERT_EQ(frames.at(5), "X");
-  ASSERT_EQ(frames.at(6), "X");
-  ASSERT_EQ(frames.at(7), "X");
-  ASSERT_EQ(frames.at(8), "X");
-  ASSERT_EQ(frames.at(9), "X");
-  ASSERT_EQ(frames.at(10), "XX");
+  const vector<string> v = {"X","X","X","X","X","X","X","X","X","X","XX"};
+  ASSERT_EQ(game.getFrames(), v);
 }
 
 TEST_F(bowlingTest, _9minusFrames)
 {
   Bowling game(alwaysAlmostPerfect);  
-  auto frames = game.getFrames();
-  ASSERT_EQ(frames.at(0), "9-");
-  ASSERT_EQ(frames.at(1), "9-");
-  ASSERT_EQ(frames.at(2), "9-");
-  ASSERT_EQ(frames.at(3), "9-");
-  ASSERT_EQ(frames.at(4), "9-");
-  ASSERT_EQ(frames.at(5), "9-");
-  ASSERT_EQ(frames.at(6), "9-");
-  ASSERT_EQ(frames.at(7), "9-");
-  ASSERT_EQ(frames.at(8), "9-");
-  ASSERT_EQ(frames.at(9), "9-");
-  ASSERT_EQ(frames.at(10), "");
-}
+  const vector<string> v = {"9-","9-","9-","9-","9-","9-","9-","9-","9-","9-",""};
+  ASSERT_EQ(game.getFrames(), v);}
 
 TEST_F(bowlingTest, _5slashFrames)
 {
   Bowling game(twentyOneFives);  
-  auto frames = game.getFrames();
-  ASSERT_EQ(frames.at(0), "5/");
-  ASSERT_EQ(frames.at(1), "5/");
-  ASSERT_EQ(frames.at(2), "5/");
-  ASSERT_EQ(frames.at(3), "5/");
-  ASSERT_EQ(frames.at(4), "5/");
-  ASSERT_EQ(frames.at(5), "5/");
-  ASSERT_EQ(frames.at(6), "5/");
-  ASSERT_EQ(frames.at(7), "5/");
-  ASSERT_EQ(frames.at(8), "5/");
-  ASSERT_EQ(frames.at(9), "5/");
-  ASSERT_EQ(frames.at(10), "5");
+  const vector<string> v = {"5/","5/","5/","5/","5/","5/","5/","5/","5/","5/","5"};
+  ASSERT_EQ(game.getFrames(), v);
 }
 
 // tests of validateFrames method:
