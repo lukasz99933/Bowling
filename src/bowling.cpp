@@ -1,15 +1,14 @@
 #include "bowling.hpp"
 #include <iostream>
-#include <string>
 #include <cctype>
 
 using namespace std;
 
-void Bowling::frameize(const string& s)
+void Bowling::frameize(const Frame& s)
 {
-  string s0 = s;
-  string::size_type pos;
-  while ((pos = s0.find(separator)) != string::npos) {  
+  Frame s0 = s;
+  Frame::size_type pos;
+  while ((pos = s0.find(separator)) != Frame::npos) {  
     frames.push_back(s0.substr(0,pos));
     s0 = s0.substr(pos+1, s0.length());  
   }
@@ -19,7 +18,7 @@ void Bowling::frameize(const string& s)
 }
 
 
-Bowling::Bowling(const string& s)
+Bowling::Bowling(const Frame& s)
 {
   frameize(s);
 }
@@ -30,7 +29,7 @@ bool Bowling::correctSymbol(const char symbol)
   return symbol==miss or symbol==spare or symbol==strike or symbol==separator or (isdigit(symbol) and symbol!='0') ;
 }
 
-bool Bowling::correctSymbols(const string& frame)
+bool Bowling::correctSymbols(const Frame& frame)
 {
   for(char symbol : frame)
      if (not correctSymbol(symbol))
@@ -38,24 +37,24 @@ bool Bowling::correctSymbols(const string& frame)
   return true;
 }
 
-bool isFrameSizeIncorrect(const string& frame)
+bool isFrameSizeIncorrect(const Frame& frame)
 {
   return frame.size() > 2 or frame.size() == 0 ;
 }
 
-auto butLast(const vector<string>& v)
+Frames butLast(const Frames& fr)
 {
-  auto result(v);
+  auto result(fr);
   result.pop_back();
   return result;
 }
 
 bool Bowling::validateFrames()
 {
-    for(string frame : butLast(frames))
+    for(Frame frame : standardFrames())
         if (isFrameSizeIncorrect(frame) or not correctSymbols(frame) or (frame.size()==2 and sumAPair(frame)>10))
             return false;
-    return (correctSymbols(bonus())); 
+    return (correctSymbols(bonusFrame())); 
 }
 
 int Bowling::translateChar(const char ch)
@@ -68,12 +67,12 @@ int Bowling::translateChar(const char ch)
     return ch - '0';
 }
 
-bool Bowling::hasStrike(const string& frame)
+bool Bowling::hasStrike(const Frame& frame)
 {
   return frame[0] == strike;
 }
 
-bool Bowling::hasSpare(const string& frame)
+bool Bowling::hasSpare(const Frame& frame)
 {
   return frame.length() == 2 and frame[1] == spare;
 }
@@ -96,19 +95,20 @@ int Bowling::countExtra(const int i)
 int Bowling::countExtras()  
 {  
   int extraScore = 0;
-  for(vector<string>::size_type i = 0; i < frames.size() - 1; i++)
-    extraScore += countExtra(i);
+  int i = 0;
+  for(auto frame : standardFrames()) 
+    extraScore += countExtra(i++);
   return extraScore;
 }  
 
 
-int Bowling::sumAPair(const string& frame)
+int Bowling::sumAPair(const Frame& frame)
 {
    return  hasSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
 }
 
 
-int Bowling::countSeparateScore(const string& frame)
+int Bowling::countSeparateScore(const Frame& frame)
 {
   return  frame.length() == 1  ?   10  :  sumAPair(frame);
 }
@@ -117,7 +117,7 @@ int Bowling::countSeparateScore(const string& frame)
 int Bowling::countStandardScore()
 {  
   int score = 0;  
-  for(auto frame: butLast(frames)) 
+  for(auto frame: standardFrames()) 
     score += countSeparateScore(frame);
   return score;
 }

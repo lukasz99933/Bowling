@@ -57,27 +57,27 @@ TEST_F(bowlingTest, threeFrames)
 TEST_F(bowlingTest, mixedFrames)
 {
   Bowling game(mixed);  
-  const vector<string> v = {"X","7/","9-","X","-8","8/","-6","X","X","X","81"};
+  const Frames v = {"X","7/","9-","X","-8","8/","-6","X","X","X","81"};
   ASSERT_EQ(game.getFrames(), v);
 }
 
 TEST_F(bowlingTest, xsFrames)
 {
   Bowling game(perfectScore);  
-  const vector<string> v = {"X","X","X","X","X","X","X","X","X","X","XX"};
+  const Frames v = {"X","X","X","X","X","X","X","X","X","X","XX"};
   ASSERT_EQ(game.getFrames(), v);
 }
 
 TEST_F(bowlingTest, _9minusFrames)
 {
   Bowling game(alwaysAlmostPerfect);  
-  const vector<string> v = {"9-","9-","9-","9-","9-","9-","9-","9-","9-","9-",""};
+  const Frames v = {"9-","9-","9-","9-","9-","9-","9-","9-","9-","9-",""};
   ASSERT_EQ(game.getFrames(), v);}
 
 TEST_F(bowlingTest, _5slashFrames)
 {
   Bowling game(twentyOneFives);  
-  const vector<string> v = {"5/","5/","5/","5/","5/","5/","5/","5/","5/","5/","5"};
+  const Frames v = {"5/","5/","5/","5/","5/","5/","5/","5/","5/","5/","5"};
   ASSERT_EQ(game.getFrames(), v);
 }
 

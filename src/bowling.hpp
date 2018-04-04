@@ -5,11 +5,15 @@
 
 using namespace std;
 
+using Frame = string;
+using Frames = vector<Frame>;
+
+Frames butLast(const vector<Frame>& v);
 
 class Bowling  
 {
 public:
-  Bowling(const string& s);
+  Bowling(const Frame& s);
   auto getFrames() const { return frames; };  //public for tests only
   bool validateFrames();  
   int countExtras(); //public for tests only
@@ -22,20 +26,21 @@ private:
   const char strike = 'X';
   const char separator = '|';
 
-  void frameize(const string& s);
-  vector<string> frames;
-  string bonus() const {return frames.back();};
-  bool validateFrame(const string& frame);
+  void frameize(const Frame& s);
+  Frames frames;
+  Frame bonusFrame() const {return frames.back();};
+  Frames standardFrames() const {return butLast(frames);};
+  bool validateFrame(const Frame& frame);
   int scoreFor2Balls(const int i);
-  int countSeparateScore(const string& frame);  
+  int countSeparateScore(const Frame& frame);  
   int countStandardScore();
-  int sumAPair(const string& frame);
+  int sumAPair(const Frame& frame);
   int countExtra(const int i);
   bool correctSymbol(const char symbol);
-  bool correctSymbols(const string& frame);
+  bool correctSymbols(const Frame& frame);
 
-  bool hasSpare(const string& frame);
-  bool hasStrike(const string& frame);
+  bool hasSpare(const Frame& frame);
+  bool hasStrike(const Frame& frame);
 
 };
 
