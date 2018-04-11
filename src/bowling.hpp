@@ -2,13 +2,12 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
-using namespace std;
+using Frame = std::string;
+using Frames = std::vector<Frame>;
 
-using Frame = string;
-using Frames = vector<Frame>;
-
-Frames butLast(const vector<Frame>& v);
+Frames butLast(const Frames& v);
 
 class Bowling  
 {

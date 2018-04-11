@@ -21,6 +21,7 @@ void Bowling::frameize(const Frame& s)
 Bowling::Bowling(const Frame& s)
 {
   frameize(s);
+  validateFrames();
 }
 
 

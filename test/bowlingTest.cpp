@@ -57,28 +57,28 @@ TEST_F(bowlingTest, threeFrames)
 TEST_F(bowlingTest, mixedFrames)
 {
   Bowling game(mixed);  
-  const Frames v = {"X","7/","9-","X","-8","8/","-6","X","X","X","81"};
-  ASSERT_EQ(game.getFrames(), v);
+  const Frames expected = {"X","7/","9-","X","-8","8/","-6","X","X","X","81"};
+  ASSERT_EQ(game.getFrames(), expected);
 }
 
 TEST_F(bowlingTest, xsFrames)
 {
   Bowling game(perfectScore);  
-  const Frames v = {"X","X","X","X","X","X","X","X","X","X","XX"};
-  ASSERT_EQ(game.getFrames(), v);
+  const Frames expected = {"X","X","X","X","X","X","X","X","X","X","XX"};
+  ASSERT_EQ(game.getFrames(), expected);
 }
 
 TEST_F(bowlingTest, _9minusFrames)
 {
   Bowling game(alwaysAlmostPerfect);  
-  const Frames v = {"9-","9-","9-","9-","9-","9-","9-","9-","9-","9-",""};
-  ASSERT_EQ(game.getFrames(), v);}
+  const Frames expected = {"9-","9-","9-","9-","9-","9-","9-","9-","9-","9-",""};
+  ASSERT_EQ(game.getFrames(), expected);}
 
 TEST_F(bowlingTest, _5slashFrames)
 {
   Bowling game(twentyOneFives);  
-  const Frames v = {"5/","5/","5/","5/","5/","5/","5/","5/","5/","5/","5"};
-  ASSERT_EQ(game.getFrames(), v);
+  const Frames expected = {"5/","5/","5/","5/","5/","5/","5/","5/","5/","5/","5"};
+  ASSERT_EQ(game.getFrames(), expected);
 }
 
 // tests of validateFrames method:
