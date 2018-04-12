@@ -9,6 +9,14 @@ using Frames = std::vector<Frame>;
 
 Frames butLast(const Frames& v);
 
+namespace Scores 
+{
+  const char miss   = '-'; 
+  const char spare  = '/'; 
+  const char strike = 'X'; 
+  const char separator = '|'; 
+}
+
 class Bowling  
 {
 public:
@@ -20,11 +28,6 @@ public:
   int translateChar(const char ch); //public for tests only
 
 private:
-  const char miss   = '-';
-  const char spare  = '/';
-  const char strike = 'X';
-  const char separator = '|';
-
   void frameize(const Frame& s);
   Frames frames;
   Frame bonusFrame() const;

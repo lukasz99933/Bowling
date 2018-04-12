@@ -40,6 +40,7 @@ Bowling::Bowling(const Frame& s)
 
 bool Bowling::correctSymbol(const char symbol)
 {
+  using namespace Scores;
   return symbol==miss or symbol==spare or symbol==strike or symbol==separator or (isdigit(symbol) and symbol!='0') ;
 }
 
