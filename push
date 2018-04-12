@@ -1,3 +1,0 @@
-git add src/bowling.cpp src/bowling.hpp src/main.cpp test/bowlingTest.cpp
-git commit
-git push https://github.com/lukasz99933/Bowling
