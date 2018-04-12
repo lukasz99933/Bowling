@@ -9,7 +9,7 @@ using Frames = std::vector<Frame>;
 
 Frames butLast(const Frames& v);
 
-namespace Scores 
+namespace Symbol 
 {
   const char miss   = '-'; 
   const char spare  = '/'; 
@@ -20,7 +20,7 @@ namespace Scores
 class Bowling  
 {
 public:
-  Bowling(const Frame& s);
+  Bowling(const std::string& s);
   auto getFrames() const { return frames; };  //public for tests only
   bool validateFrames();  
   int countExtras(); //public for tests only
@@ -28,7 +28,7 @@ public:
   int translateChar(const char ch); //public for tests only
 
 private:
-  void frameize(const Frame& s);
+  void frameize(const std::string& s);
   Frames frames;
   Frame bonusFrame() const;
   Frames standardFrames() const;

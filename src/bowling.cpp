@@ -6,11 +6,11 @@
 
 using namespace std;
 
-void Bowling::frameize(const Frame& s)
+void Bowling::frameize(const string& s)
 {
   Frame s0 = s;
   Frame::size_type pos;
-  while ((pos = s0.find(separator)) != Frame::npos) {  
+  while ((pos = s0.find(Symbol::separator)) != Frame::npos) {  
     frames.push_back(s0.substr(0,pos));
     s0 = s0.substr(pos+1, s0.length());  
   }
@@ -31,7 +31,7 @@ Frames Bowling::standardFrames() const
 }
 
 
-Bowling::Bowling(const Frame& s)
+Bowling::Bowling(const string& s)
 {
   frameize(s);
   validateFrames();
@@ -40,8 +40,7 @@ Bowling::Bowling(const Frame& s)
 
 bool Bowling::correctSymbol(const char symbol)
 {
-  using namespace Scores;
-  return symbol==miss or symbol==spare or symbol==strike or symbol==separator or (isdigit(symbol) and symbol!='0') ;
+  return symbol==Symbol::miss or symbol==Symbol::spare or symbol==Symbol::strike or symbol==Symbol::separator or (isdigit(symbol) and symbol!='0') ;
 }
 
 bool Bowling::correctSymbols(const Frame& frame)
@@ -74,9 +73,9 @@ bool Bowling::validateFrames()
 
 int Bowling::translateChar(const char ch)
 {
-  if (ch==miss or ch==spare)
+  if (ch==Symbol::miss or ch==Symbol::spare)
     return 0;
-  else if (ch==strike)
+  else if (ch==Symbol::strike)
     return 10;
   else
     return ch - '0';
@@ -84,12 +83,12 @@ int Bowling::translateChar(const char ch)
 
 bool Bowling::hasStrike(const Frame& frame)
 {
-  return frame[0] == strike;
+  return frame[0] == Symbol::strike;
 }
 
 bool Bowling::hasSpare(const Frame& frame)
 {
-  return frame.length() == 2 and frame[1] == spare;
+  return frame.length() == 2 and frame[1] == Symbol::spare;
 }
 
 
