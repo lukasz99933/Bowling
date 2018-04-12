@@ -1,6 +1,8 @@
 #include "bowling.hpp"
 #include <iostream>
 #include <cctype>
+#include <numeric>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,6 +17,17 @@ void Bowling::frameize(const Frame& s)
   frames.push_back(s0);
   if (frames.size() > 11) 
     frames.erase(frames.begin() + 10);
+}
+
+Frame Bowling::bonusFrame() const 
+{
+  return frames.back();
+}
+
+
+Frames Bowling::standardFrames() const 
+{
+  return butLast(frames);
 }
 
 
@@ -95,12 +108,15 @@ int Bowling::countExtra(const int i)
 
 int Bowling::countExtras()  
 {  
-  int extraScore = 0;
-  int i = 0;
-  for(auto frame : standardFrames()) 
-    extraScore += countExtra(i++);
-  return extraScore;
-}  
+  int i=0;
+  return accumulate(frames.begin(), prev(frames.end()), 0, 
+              [&](int sum, Frame frame) 
+              { 
+                return sum + countExtra(i++);
+                if (frame.length()>0) 
+                  i++;  
+              });
+} 
 
 
 int Bowling::sumAPair(const Frame& frame)
@@ -117,10 +133,11 @@ int Bowling::countSeparateScore(const Frame& frame)
 
 int Bowling::countStandardScore()
 {  
-  int score = 0;  
-  for(auto frame: standardFrames()) 
-    score += countSeparateScore(frame);
-  return score;
+  return accumulate(frames.begin(), prev(frames.end()), 0, 
+              [=](int sum, Frame frame) 
+              { 
+                return sum + countSeparateScore(frame);
+              });
 }
 
 int Bowling::countScore()

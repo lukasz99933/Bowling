@@ -27,8 +27,8 @@ private:
 
   void frameize(const Frame& s);
   Frames frames;
-  Frame bonusFrame() const {return frames.back();};
-  Frames standardFrames() const {return butLast(frames);};
+  Frame bonusFrame() const;
+  Frames standardFrames() const;
   bool validateFrame(const Frame& frame);
   int scoreFor2Balls(const int i);
   int countSeparateScore(const Frame& frame);  
