@@ -25,12 +25,6 @@ Frame Bowling::bonusFrame() const
 }
 
 
-Frames Bowling::standardFrames() const 
-{
-  return butLast(frames);
-}
-
-
 Bowling::Bowling(const string& s)
 {
   frameize(s);
@@ -40,35 +34,31 @@ Bowling::Bowling(const string& s)
 
 bool Bowling::correctSymbol(const char symbol)
 {
-  return symbol==Symbol::miss or symbol==Symbol::spare or symbol==Symbol::strike or symbol==Symbol::separator or (isdigit(symbol) and symbol!='0') ;
+  return symbol==Symbol::miss or symbol==Symbol::spare or symbol==Symbol::strike or symbol==Symbol::separator 
+          or (isdigit(symbol) and symbol!='0') ;
 }
 
 bool Bowling::correctSymbols(const Frame& frame)
 {
-  for(char symbol : frame)
-     if (not correctSymbol(symbol))
-        return false;
-  return true;
+  return all_of(frame.begin(), frame.end(), 
+           [=](const char symbol) 
+           { 
+             return correctSymbol(symbol);
+           });
 }
 
-bool isFrameSizeIncorrect(const Frame& frame)
+bool isFrameSizeCorrect(const Frame& frame)
 {
-  return frame.size() > 2 or frame.size() == 0 ;
-}
-
-Frames butLast(const Frames& fr)
-{
-  auto result(fr);
-  result.pop_back();
-  return result;
+  return frame.size() <= 2 and frame.size() > 0 ;
 }
 
 bool Bowling::validateFrames()
 {
-    for(Frame frame : standardFrames())
-        if (isFrameSizeIncorrect(frame) or not correctSymbols(frame) or (frame.size()==2 and sumAPair(frame)>10))
-            return false;
-    return (correctSymbols(bonusFrame())); 
+  return all_of(frames.begin(), prev(frames.end()),
+           [=](const Frame frame) 
+           {
+             return isFrameSizeCorrect(frame) and correctSymbols(frame) and (frame.size()!=2 or sumAPair(frame)<=10);
+           } );       
 }
 
 int Bowling::translateChar(const char ch)

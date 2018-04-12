@@ -7,8 +7,6 @@
 using Frame = std::string;
 using Frames = std::vector<Frame>;
 
-Frames butLast(const Frames& v);
-
 namespace Symbol 
 {
   const char miss   = '-'; 
@@ -31,7 +29,6 @@ private:
   void frameize(const std::string& s);
   Frames frames;
   Frame bonusFrame() const;
-  Frames standardFrames() const;
   bool validateFrame(const Frame& frame);
   int scoreFor2Balls(const int i);
   int countSeparateScore(const Frame& frame);  
