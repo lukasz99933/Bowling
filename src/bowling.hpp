@@ -19,6 +19,7 @@ namespace Symbol
   const std::string correctSymbols = std::string() + miss + spare + strike + separator + "123456789";
 }
 
+void eliminateDoubleSeparator(Frames & frames);
 bool inside(const std::string & s, const char ch);
 bool isFrameSizeCorrect(const Frame& frame);
 

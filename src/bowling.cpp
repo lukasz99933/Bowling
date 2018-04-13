@@ -5,6 +5,14 @@
 
 using namespace std;
 
+
+void eliminateDoubleSeparator(Frames & frames)
+{
+  if (frames.size() > 11) 
+    frames.erase(frames.begin() + 10);
+}
+
+
 void Bowling::frameize(const string& s)
 {
   Frame s0 = s;
@@ -15,8 +23,7 @@ void Bowling::frameize(const string& s)
     s0 = s0.substr(pos+1, s0.length());  
   }
   frames.push_back(s0);
-  if (frames.size() > 11) 
-    frames.erase(frames.begin() + 10);
+  eliminateDoubleSeparator(frames);
 }
 
 Frame Bowling::bonusFrame() const 
