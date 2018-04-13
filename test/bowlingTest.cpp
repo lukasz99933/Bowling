@@ -95,11 +95,15 @@ TEST_F(bowlingTest, validationTooManyDigits)
     ASSERT_FALSE(game1.validateFrames());
 }
 
-TEST_F(bowlingTest, validationNotCorrectSymbols)
+
+TEST_F(bowlingTest, validationIncorrectSeparators)
 {
     Bowling game1("X|X|X|X|X|X||X|X|X|X|XX");
     ASSERT_FALSE(game1.validateFrames());
+}
 
+TEST_F(bowlingTest, validationIncorrectSymbol)
+{
     Bowling game2("Y|7/|9-|X|-8|8/|-6|X|X|X||81");
     ASSERT_FALSE(game2.validateFrames());
 
@@ -202,11 +206,10 @@ TEST_F(bowlingTest, countScore)
 
 TEST_F(bowlingTest, incorrectData)
 {
-    Bowling game1("111|--|--|--|--|--|--|--|--|--||");
-    ASSERT_EQ(game1.countScore(),-1);
+  Bowling game1("111|--|--|--|--|--|--|--|--|--||");
+  ASSERT_THROW(game1.countScore(), std::invalid_argument);
 
-    Bowling game2("0-|--|--|--|--|--|--|--|--|--||");
-    ASSERT_EQ(game2.countScore(),-1);
+  Bowling game2("0-|--|--|--|--|--|--|--|--|--||");
+  ASSERT_THROW(game2.countScore(), std::invalid_argument);
 }
-
 

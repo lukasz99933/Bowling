@@ -120,7 +120,7 @@ int Bowling::countExtras()
               [&](int & sum, const Frame & frame) 
               { 
                 return sum + countExtra(it++);
-                if (frame == "") {};   // because of compiler's pedantic... :/
+                if (frame == "") {};  
               });
 } 
 
@@ -152,5 +152,5 @@ int Bowling::countScore()
   if (validateFrames())
     return countStandardScore() + countExtras();
   else 
-    return -1; // to correct
+    throw std::invalid_argument("Invalid input!");
 }

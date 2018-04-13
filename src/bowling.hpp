@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <stdexcept>
 
 using Frame = std::string;
 using Frames = std::vector<Frame>;
