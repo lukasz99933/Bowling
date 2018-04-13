@@ -18,9 +18,7 @@ namespace Symbol
   const std::string correctSymbols = std::string() + miss + spare + strike + separator + "123456789";
 }
 
-void eliminateDoubleSeparator(Frames & frames);
 bool inside(const std::string & s, const char ch);
-bool isFrameSizeCorrect(const Frame& frame);
 
 class Bowling  
 {
@@ -46,6 +44,9 @@ private:
 
   bool hasSpare(const Frame& frame);
   bool hasStrike(const Frame& frame);
+
+  void eliminateDoubleSeparator(Frames & frames);
+  bool isFrameSizeCorrect(const Frame& frame);
 
 };
 

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void eliminateDoubleSeparator(Frames & frames)
+void Bowling::eliminateDoubleSeparator(Frames & frames)
 {
   if (frames.size() > 11) 
     frames.erase(frames.begin() + 10);
@@ -55,7 +55,7 @@ bool Bowling::areSymbolsCorrect(const Frame& frame)
 }
 
 
-bool isFrameSizeCorrect(const Frame& frame)
+bool Bowling::isFrameSizeCorrect(const Frame& frame)
 {
   return frame.size() <= 2 and frame.size() > 0 ;
 }
