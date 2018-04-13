@@ -28,7 +28,6 @@ public:
   bool validateFrames();  
   int countExtras(); //public for tests only
   int countScore();
-  int translateChar(const char ch); //public for tests only
 
 private:
   void frameize(const std::string& s);
@@ -47,6 +46,8 @@ private:
 
   void eliminateDoubleSeparator(Frames & frames);
   bool isFrameSizeCorrect(const Frame& frame);
+
+  int translateChar(const char ch); 
 
 };
 

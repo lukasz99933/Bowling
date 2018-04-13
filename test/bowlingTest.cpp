@@ -119,18 +119,6 @@ TEST_F(bowlingTest, validationTooFewSymbols)
     ASSERT_FALSE(game3.validateFrames());
 }
 
-// tests of translateChar function:
-
-TEST_F(bowlingTest, translate1)
-{
-  Bowling game("");
-  ASSERT_EQ(game.translateChar('1'), 1);
-  ASSERT_EQ(game.translateChar('2'), 2);
-  ASSERT_EQ(game.translateChar('X'), 10);
-  ASSERT_EQ(game.translateChar('-'), 0);
-  ASSERT_EQ(game.translateChar('/'), 0);  
-}
-
 
 // test of extras:
 
@@ -172,6 +160,8 @@ TEST_F(bowlingTest, perfectExtra)
   ASSERT_EQ(game.countExtras(), 200);
 }
 
+
+
 // test of total score:
 
 TEST_F(bowlingTest, countScore)
@@ -196,6 +186,18 @@ TEST_F(bowlingTest, countScore)
 
     Bowling game7("X|34|--|--|--|--|--|--|--|--||");
     ASSERT_EQ(game7.countScore(),10+7 + 7);
+
+    Bowling game8("--|--|--|1-|--|--|--|--|--|--||");
+    ASSERT_EQ(game8.countScore(),1);
+
+    Bowling game9("--|--|--|--|--|--|2-|--|--|--||");
+    ASSERT_EQ(game9.countScore(), 2);
+
+    Bowling game10("--|X|--|--|--|--|--|--|--|--||");
+    ASSERT_EQ(game10.countScore(), 10);
+
+    Bowling game11("--|--|--|--|--|--|--|8/|--|--||");
+    ASSERT_EQ(game11.countScore(), 10);
 }
 
 TEST_F(bowlingTest, incorrectData)
