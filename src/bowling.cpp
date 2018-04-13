@@ -1,5 +1,4 @@
 #include "bowling.hpp"
-#include <iostream>
 #include <cctype>
 #include <numeric>
 #include <algorithm>
@@ -55,7 +54,7 @@ bool isFrameSizeCorrect(const Frame& frame)
 bool Bowling::validateFrames()
 {
   return all_of(frames.begin(), prev(frames.end()),
-           [=](const Frame frame) 
+           [=](const Frame & frame) 
            {
              return isFrameSizeCorrect(frame) and correctSymbols(frame) and (frame.size()!=2 or sumAPair(frame)<=10);
            } );       
@@ -82,29 +81,31 @@ bool Bowling::hasSpare(const Frame& frame)
 }
 
 
-int Bowling::scoreFor2Balls(const int i)
+int Bowling::scoreFor2Balls(const Iterator & it)
 {
-  return frames.at(i).length() == 2  ?  sumAPair(frames.at(i))  :  10 + translateChar(frames.at(i+1)[0]); 
+  return it->length() == 2  ?  sumAPair(*it)  :  10 + translateChar((*next(it))[0]); 
 }
 
-int Bowling::countExtra(const int i)  
+int Bowling::countExtra(const Iterator & it)  
 {
-  if (hasSpare(frames.at(i)))
-    return translateChar(frames.at(i+1)[0]);
-  else if (hasStrike(frames.at(i))) 
-    return scoreFor2Balls(i+1);
-  return 0; 
+  const Frame frame = *it;
+  const Frame nextFrame = *next(it);
+
+  if (hasSpare(frame))
+    return translateChar(nextFrame[0]);
+  else if (hasStrike(frame)) 
+    return scoreFor2Balls(next(it));
+  else return 0; 
 }
 
 int Bowling::countExtras()  
 {  
-  int i=0;
-  return accumulate(frames.begin(), prev(frames.end()), 0, 
-              [&](int sum, Frame frame) 
+  Iterator it = frames.begin();
+  return accumulate(it, prev(frames.end()), 0, 
+              [&](int & sum, const Frame & frame) 
               { 
-                return sum + countExtra(i++);
-                if (frame.length()>0) 
-                  i++;  
+                return sum + countExtra(it++);
+                if (frame == "") {};   // because of compiler's pedantic... :/
               });
 } 
 
@@ -124,7 +125,7 @@ int Bowling::countSeparateScore(const Frame& frame)
 int Bowling::countStandardScore()
 {  
   return accumulate(frames.begin(), prev(frames.end()), 0, 
-              [=](int sum, Frame frame) 
+              [=](int & sum, const Frame & frame) 
               { 
                 return sum + countSeparateScore(frame);
               });
@@ -135,5 +136,5 @@ int Bowling::countScore()
   if (validateFrames())
      return countStandardScore() + countExtras();
   else 
-     return -1;
+     return -1; // to correct
 }

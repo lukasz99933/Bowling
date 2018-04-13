@@ -2,10 +2,12 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
+#include <iterator>
+//#include <iostream>
 
 using Frame = std::string;
 using Frames = std::vector<Frame>;
+using Iterator = Frames::iterator;
 
 namespace Symbol 
 {
@@ -30,11 +32,11 @@ private:
   Frames frames;
   Frame bonusFrame() const;
   bool validateFrame(const Frame& frame);
-  int scoreFor2Balls(const int i);
+  int scoreFor2Balls(const Iterator & it);
   int countSeparateScore(const Frame& frame);  
   int countStandardScore();
   int sumAPair(const Frame& frame);
-  int countExtra(const int i);
+  int countExtra(const Iterator & it);
   bool correctSymbol(const char symbol);
   bool correctSymbols(const Frame& frame);
 
