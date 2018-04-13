@@ -15,7 +15,12 @@ namespace Symbol
   const char spare  = '/'; 
   const char strike = 'X'; 
   const char separator = '|'; 
+  
+  const std::string correctSymbols = std::string() + miss + spare + strike + separator + "123456789";
 }
+
+bool inside(const std::string & s, const char ch);
+bool isFrameSizeCorrect(const Frame& frame);
 
 class Bowling  
 {
@@ -37,8 +42,8 @@ private:
   int countStandardScore();
   int sumAPair(const Frame& frame);
   int countExtra(const Iterator & it);
-  bool correctSymbol(const char symbol);
-  bool correctSymbols(const Frame& frame);
+  bool isSymbolCorrect(const char symbol);
+  bool areSymbolsCorrect(const Frame& frame);
 
   bool hasSpare(const Frame& frame);
   bool hasStrike(const Frame& frame);

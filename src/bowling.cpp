@@ -9,7 +9,8 @@ void Bowling::frameize(const string& s)
 {
   Frame s0 = s;
   Frame::size_type pos;
-  while ((pos = s0.find(Symbol::separator)) != Frame::npos) {  
+  while ((pos = s0.find(Symbol::separator)) != Frame::npos) 
+  {  
     frames.push_back(s0.substr(0,pos));
     s0 = s0.substr(pos+1, s0.length());  
   }
@@ -23,26 +24,28 @@ Frame Bowling::bonusFrame() const
   return frames.back();
 }
 
-
 Bowling::Bowling(const string& s)
 {
   frameize(s);
   validateFrames();
 }
 
-
-bool Bowling::correctSymbol(const char symbol)
+bool inside(const string & s, const char ch)
 {
-  return symbol==Symbol::miss or symbol==Symbol::spare or symbol==Symbol::strike or symbol==Symbol::separator 
-          or (isdigit(symbol) and symbol!='0') ;
+  return s.find(ch) != std::string::npos;
 }
 
-bool Bowling::correctSymbols(const Frame& frame)
+bool Bowling::isSymbolCorrect(const char ch)
+{
+  return inside(Symbol::correctSymbols, ch);
+}
+
+bool Bowling::areSymbolsCorrect(const Frame& frame)
 {
   return all_of(frame.begin(), frame.end(), 
            [=](const char symbol) 
            { 
-             return correctSymbol(symbol);
+             return isSymbolCorrect(symbol);
            });
 }
 
@@ -56,7 +59,7 @@ bool Bowling::validateFrames()
   return all_of(frames.begin(), prev(frames.end()),
            [=](const Frame & frame) 
            {
-             return isFrameSizeCorrect(frame) and correctSymbols(frame) and (frame.size()!=2 or sumAPair(frame)<=10);
+             return isFrameSizeCorrect(frame) and areSymbolsCorrect(frame) and (frame.size()!=2 or sumAPair(frame)<=10);
            } );       
 }
 
@@ -64,7 +67,7 @@ int Bowling::translateChar(const char ch)
 {
   if (ch==Symbol::miss or ch==Symbol::spare)
     return 0;
-  else if (ch==Symbol::strike)
+  else if (ch == Symbol::strike)
     return 10;
   else
     return ch - '0';
