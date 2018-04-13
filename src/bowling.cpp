@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 void eliminateDoubleSeparator(Frames & frames)
 {
   if (frames.size() > 11) 
@@ -26,10 +25,6 @@ void Bowling::frameize(const string& s)
   eliminateDoubleSeparator(frames);
 }
 
-Frame Bowling::bonusFrame() const 
-{
-  return frames.back();
-}
 
 Bowling::Bowling(const string& s)
 {
@@ -37,15 +32,18 @@ Bowling::Bowling(const string& s)
   validateFrames();
 }
 
+
 bool inside(const string & s, const char ch)
 {
   return s.find(ch) != std::string::npos;
 }
 
+
 bool Bowling::isSymbolCorrect(const char ch)
 {
   return inside(Symbol::correctSymbols, ch);
 }
+
 
 bool Bowling::areSymbolsCorrect(const Frame& frame)
 {
@@ -56,10 +54,12 @@ bool Bowling::areSymbolsCorrect(const Frame& frame)
            });
 }
 
+
 bool isFrameSizeCorrect(const Frame& frame)
 {
   return frame.size() <= 2 and frame.size() > 0 ;
 }
+
 
 bool Bowling::validateFrames()
 {
@@ -69,6 +69,7 @@ bool Bowling::validateFrames()
              return isFrameSizeCorrect(frame) and areSymbolsCorrect(frame) and (frame.size()!=2 or sumAPair(frame)<=10);
            } );       
 }
+
 
 int Bowling::translateChar(const char ch)
 {
@@ -80,10 +81,12 @@ int Bowling::translateChar(const char ch)
     return ch - '0';
 }
 
+
 bool Bowling::hasStrike(const Frame& frame)
 {
   return frame[0] == Symbol::strike;
 }
+
 
 bool Bowling::hasSpare(const Frame& frame)
 {
@@ -96,6 +99,7 @@ int Bowling::scoreFor2Balls(const Iterator & it)
   return it->length() == 2  ?  sumAPair(*it)  :  10 + translateChar((*next(it))[0]); 
 }
 
+
 int Bowling::countExtra(const Iterator & it)  
 {
   const Frame frame = *it;
@@ -107,6 +111,7 @@ int Bowling::countExtra(const Iterator & it)
     return scoreFor2Balls(next(it));
   else return 0; 
 }
+
 
 int Bowling::countExtras()  
 {  
@@ -122,7 +127,7 @@ int Bowling::countExtras()
 
 int Bowling::sumAPair(const Frame& frame)
 {
-   return  hasSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
+  return  hasSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
 }
 
 
@@ -141,10 +146,11 @@ int Bowling::countStandardScore()
               });
 }
 
+
 int Bowling::countScore()
 {
   if (validateFrames())
-     return countStandardScore() + countExtras();
+    return countStandardScore() + countExtras();
   else 
-     return -1; // to correct
+    return -1; // to correct
 }

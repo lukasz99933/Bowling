@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <iterator>
-//#include <iostream>
 
 using Frame = std::string;
 using Frames = std::vector<Frame>;
@@ -36,7 +35,6 @@ public:
 private:
   void frameize(const std::string& s);
   Frames frames;
-  Frame bonusFrame() const;
   bool validateFrame(const Frame& frame);
   int scoreFor2Balls(const Iterator & it);
   int countSeparateScore(const Frame& frame);  
