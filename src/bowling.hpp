@@ -24,9 +24,9 @@ class Bowling
 {
 public:
   Bowling(const std::string& s);
-  auto getFrames() const { return frames; };  //public for tests only
+  auto getFrames() const { return frames; };
   bool validateFrames();  
-  int countExtras(); //public for tests only
+  int countExtras(); 
   int countScore();
 
 private:
