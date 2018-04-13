@@ -97,7 +97,7 @@ TEST_F(bowlingTest, validationTooManyDigits)
 
 TEST_F(bowlingTest, validationNotCorrectSymbols)
 {
-    Bowling game1("a||X|123456");
+    Bowling game1("X|X|X|X|X|X||X|X|X|X|XX");
     ASSERT_FALSE(game1.validateFrames());
 
     Bowling game2("Y|7/|9-|X|-8|8/|-6|X|X|X||81");
