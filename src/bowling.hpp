@@ -25,7 +25,6 @@ class Bowling
 {
 public:
   Bowling(const std::string& s);
-  auto getFrames() const { return frames; };
   int countScore();
 
 private:
