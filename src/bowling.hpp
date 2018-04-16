@@ -34,7 +34,6 @@ private:
   Frames frames;
 
   void eliminateDoubleSeparator(Frames & frames);
-
 };
 
 class Bowling  
@@ -55,7 +54,7 @@ private:
   bool areSymbolsCorrect(const Frame& frame);
 
   bool validateFrames(const Frames& frames);  
-// TODO : bool validateFrame(const Frame& frame);
+  bool validateFrame(Frame frame);
 
   int translateChar(const char ch); 
 

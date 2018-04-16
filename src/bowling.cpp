@@ -26,12 +26,6 @@ Framization::Framization(const string& s)
 
 }
 
-
-/*Bowling::Bowling(const string& s)
-{
-}*/
-
-
 bool inside(const string & s, const char ch)
 {
   return s.find(ch) != std::string::npos;
@@ -48,10 +42,7 @@ bool Bowling::areSymbolsCorrect(const Frame& frame)
 {
   return all_of(frame.begin(), 
                 frame.end(), 
-                [=](const char symbol) 
-                { 
-                  return isSymbolCorrect(symbol);
-                });
+                [=](const char symbol)  { return isSymbolCorrect(symbol); });
 }
 
 
@@ -60,17 +51,18 @@ bool Bowling::isFrameSizeCorrect(const Frame& frame)
   return frame.size() <= 2 and frame.size() > 0 ;
 }
 
+bool Bowling::validateFrame(Frame frame)
+{
+   return isFrameSizeCorrect(frame) 
+          and areSymbolsCorrect(frame) 
+          and (frame.size()==1 or sumAPair(frame)<=10);
+}
 
 bool Bowling::validateFrames(const Frames& frames)
 {
   return all_of(frames.begin(), 
                 prev(frames.end()),
-                [=](const Frame & frame) 
-                {
-                  return isFrameSizeCorrect(frame) 
-                     and areSymbolsCorrect(frame) 
-                     and (frame.size()==1 or sumAPair(frame)<=10);
-                } );       
+                [=](const Frame & frame)  { return validateFrame(frame); } );       
 }
 
 
