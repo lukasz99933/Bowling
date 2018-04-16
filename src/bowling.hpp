@@ -21,34 +21,44 @@ namespace Symbol
 
 bool inside(const std::string & s, const char ch);
 
-class Bowling  
+bool hasSpare(const Frame& frame);
+bool hasStrike(const Frame& frame);
+
+
+class Framization
 {
 public:
-  Bowling(const std::string& s);
-  int countScore();
-
+  Framization(const std::string& s);
+  Frames getFrames() const& {return frames;};
 private:
   Frames frames;
 
-  void frameize(const std::string& s);
-  bool validateFrames();  
-  bool validateFrame(const Frame& frame);
+  void eliminateDoubleSeparator(Frames & frames);
+
+};
+
+class Bowling  
+{
+public:
+  int countScore(const std::string& input);
+
+private:
   int scoreFor2Balls(const Iterator & it);
   int countSeparateScore(const Frame& frame);  
-  int countStandardScore();
+  int countStandardScore(const Frames& frames);
   int sumAPair(const Frame& frame);
   int countExtra(const Iterator & it);
+  int countExtras(Frames frames);
+
+  bool isFrameSizeCorrect(const Frame& frame);
   bool isSymbolCorrect(const char symbol);
   bool areSymbolsCorrect(const Frame& frame);
 
-  bool hasSpare(const Frame& frame);
-  bool hasStrike(const Frame& frame);
-
-  void eliminateDoubleSeparator(Frames & frames);
-  bool isFrameSizeCorrect(const Frame& frame);
+  bool validateFrames(const Frames& frames);  
+// TODO : bool validateFrame(const Frame& frame);
 
   int translateChar(const char ch); 
-  int countExtras(); 
+
 };
 
 

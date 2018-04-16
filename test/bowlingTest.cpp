@@ -20,7 +20,8 @@ public:
 
 TEST_P(bowlingScoreParamTest, countScore)
 {
-    ASSERT_EQ(Bowling(GetParam().first).countScore(),GetParam().second);
+  Bowling game;
+  ASSERT_EQ(game.countScore(GetParam().first),GetParam().second);
 }
 
 INSTANTIATE_TEST_CASE_P(countScores,
@@ -43,7 +44,8 @@ INSTANTIATE_TEST_CASE_P(countScores,
 
 TEST_P(bowlingValidationParamTest, incorrectData)
 {
-  ASSERT_THROW(Bowling(GetParam()).countScore(), std::invalid_argument);
+  Bowling game;
+  ASSERT_THROW(game.countScore(GetParam()), std::invalid_argument);
 }
 
 INSTANTIATE_TEST_CASE_P(incorrectData,

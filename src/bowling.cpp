@@ -5,14 +5,14 @@
 
 using namespace std;
 
-void Bowling::eliminateDoubleSeparator(Frames & frames)
+void Framization::eliminateDoubleSeparator(Frames & frames)
 {
   if (frames.size() > 11) 
     frames.erase(frames.begin() + 10);
 }
 
 
-void Bowling::frameize(const string& s)
+Framization::Framization(const string& s)
 {
   Frame s0 = s;
   Frame::size_type pos;
@@ -23,14 +23,13 @@ void Bowling::frameize(const string& s)
   }
   frames.push_back(s0);
   eliminateDoubleSeparator(frames);
+
 }
 
 
-Bowling::Bowling(const string& s)
+/*Bowling::Bowling(const string& s)
 {
-  frameize(s);
-  validateFrames();
-}
+}*/
 
 
 bool inside(const string & s, const char ch)
@@ -62,7 +61,7 @@ bool Bowling::isFrameSizeCorrect(const Frame& frame)
 }
 
 
-bool Bowling::validateFrames()
+bool Bowling::validateFrames(const Frames& frames)
 {
   return all_of(frames.begin(), 
                 prev(frames.end()),
@@ -86,13 +85,13 @@ int Bowling::translateChar(const char ch)
 }
 
 
-bool Bowling::hasStrike(const Frame& frame)
+bool hasStrike(const Frame& frame)
 {
   return frame[0] == Symbol::strike;
 }
 
 
-bool Bowling::hasSpare(const Frame& frame)
+bool hasSpare(const Frame& frame)
 {
   return frame.length() == 2 and frame[1] == Symbol::spare;
 }
@@ -117,7 +116,7 @@ int Bowling::countExtra(const Iterator & it)
 }
 
 
-int Bowling::countExtras()  
+int Bowling::countExtras(Frames frames)  
 {  
   Iterator it = frames.begin();
   return accumulate(it, 
@@ -143,7 +142,7 @@ int Bowling::countSeparateScore(const Frame& frame)
 }
 
 
-int Bowling::countStandardScore()
+int Bowling::countStandardScore(const Frames& frames)
 {  
   return accumulate(frames.begin(), 
                     prev(frames.end()), 
@@ -155,10 +154,12 @@ int Bowling::countStandardScore()
 }
 
 
-int Bowling::countScore()
+int Bowling::countScore(const string& input)
 {
-  if (validateFrames())
-    return countStandardScore() + countExtras();
+  Framization framization(input);
+  Frames frames = framization.getFrames();
+  if (validateFrames(frames))
+    return countStandardScore(frames) + countExtras(frames);
   else 
     throw std::invalid_argument("Invalid input!");
 }
