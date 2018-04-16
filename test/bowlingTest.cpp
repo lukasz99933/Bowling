@@ -6,13 +6,23 @@ using namespace std;
 class bowlingTest : public ::testing::Test
 {
 public:
-// examples:
- const string perfectScore = "X|X|X|X|X|X|X|X|X|X||XX";
- const string alwaysAlmostPerfect = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
- const string twentyOneFives = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
- const string mixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
- const string perfectNoob = "--|--|--|--|--|--|--|--|--|--||";
+  const string perfectScore = "X|X|X|X|X|X|X|X|X|X||XX";
+  const string alwaysAlmostPerfect = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
+  const string twentyOneFives = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
+  const string mixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
+  const string perfectNoob = "--|--|--|--|--|--|--|--|--|--||";
 };
+
+class bowlingScoreParamTest : public ::testing::TestWithParam<pair<string,int>>
+{
+public:
+};
+
+class bowlingValidationParamTest : public ::testing::TestWithParam<string>
+{
+public:
+};
+
 
 
 // tests of fillFrames method:
@@ -165,51 +175,43 @@ TEST_F(bowlingTest, perfectExtra)
 }
 
 
-
 // test of total score:
 
-TEST_F(bowlingTest, countScore)
+TEST_P(bowlingScoreParamTest, countScore)
 {
-    Bowling game1(perfectScore);
-    ASSERT_EQ(game1.countScore(),300);
-
-    Bowling game2(alwaysAlmostPerfect);
-    ASSERT_EQ(game2.countScore(), 90);
-
-    Bowling game3(twentyOneFives);
-    ASSERT_EQ(game3.countScore(),150);
-
-    Bowling game4(mixed);
-    ASSERT_EQ(game4.countScore(),167);
-
-    Bowling game5("X|3/|--|--|--|--|--|--|--|--||");
-    ASSERT_EQ(game5.countScore(),10+10 + 10);
-
-    Bowling game6("X|X|23|--|--|--|--|--|--|--||");
-    ASSERT_EQ(game6.countScore(),10+10+5 + 12 + 5);
-
-    Bowling game7("X|34|--|--|--|--|--|--|--|--||");
-    ASSERT_EQ(game7.countScore(),10+7 + 7);
-
-    Bowling game8("--|--|--|1-|--|--|--|--|--|--||");
-    ASSERT_EQ(game8.countScore(),1);
-
-    Bowling game9("--|--|--|--|--|--|2-|--|--|--||");
-    ASSERT_EQ(game9.countScore(), 2);
-
-    Bowling game10("--|X|--|--|--|--|--|--|--|--||");
-    ASSERT_EQ(game10.countScore(), 10);
-
-    Bowling game11("--|--|--|--|--|--|--|8/|--|--||");
-    ASSERT_EQ(game11.countScore(), 10);
+    Bowling game(GetParam().first);
+    ASSERT_EQ(game.countScore(),GetParam().second);
 }
 
-TEST_F(bowlingTest, incorrectData)
-{
-  Bowling game1("111|--|--|--|--|--|--|--|--|--||");
-  ASSERT_THROW(game1.countScore(), std::invalid_argument);
 
-  Bowling game2("0-|--|--|--|--|--|--|--|--|--||");
-  ASSERT_THROW(game2.countScore(), std::invalid_argument);
+INSTANTIATE_TEST_CASE_P(countScores,
+                        bowlingScoreParamTest,
+                        ::testing::Values(make_pair("X|X|X|X|X|X|X|X|X|X||XX",         10*30),
+                                          make_pair("9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||", 10*9),
+                                          make_pair("5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5",10*15),
+                                          make_pair("X|7/|9-|X|-8|8/|-6|X|X|X||81",    167),
+                                          make_pair("X|3/|--|--|--|--|--|--|--|--||",  10+10 + 10),
+                                          make_pair("X|X|23|--|--|--|--|--|--|--||",   10+10+5 + 12+5),
+                                          make_pair("X|34|--|--|--|--|--|--|--|--||",  10+7 + 7),
+                                          make_pair("--|--|--|--|1-|--|--|--|--|--||", 1),
+                                          make_pair("--|--|--|--|--|2-|--|--|--|--||", 2),
+                                          make_pair("--|--|--|X|--|--|--|--|--|--||",  10),
+                                          make_pair("--|--|--|--|--|--|8/|--|--|--||" ,10)
+                                         )    
+                       );
+
+// test of validation:
+
+TEST_P(bowlingValidationParamTest, incorrectData)
+{
+  Bowling game(GetParam());
+  ASSERT_THROW(game.countScore(), std::invalid_argument);
 }
+
+INSTANTIATE_TEST_CASE_P(incorrectData,
+                        bowlingValidationParamTest,
+                        ::testing::Values("111|--|--|--|--|--|--|--|--|--||",
+                                          "0-|--|--|--|--|--|--|--|--|--||"
+                                         )    
+                       );
 
