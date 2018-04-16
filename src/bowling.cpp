@@ -120,7 +120,7 @@ int Bowling::countExtras()
               [&](int & sum, const Frame & frame) 
               { 
                 return sum + countExtra(it++);
-                if (frame == "") {};  
+                (void)(frame);
               });
 } 
 
