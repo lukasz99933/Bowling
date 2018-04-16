@@ -42,6 +42,7 @@ project(Bowling)
 set(SRC_LIST
     src/main.cpp
     src/bowling.cpp
+    src/framization.cpp
 )
 
 include_directories(src)

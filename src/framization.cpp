@@ -1,7 +1,6 @@
 #include "framization.hpp"
 #include <cctype>
 #include <numeric>
-#include <algorithm>
 
 using namespace std;
 
@@ -12,16 +11,16 @@ void Framization::eliminateDoubleSeparator(Frames & frames)
 }
 
 
-Framization::Framization(const string& s)
+Framization::Framization(const string& input)
 {
-  Frame s0 = s;
+  Frame rest = input;
   Frame::size_type pos;
-  while ((pos = s0.find(Symbol::separator)) != Frame::npos) 
+  while ((pos = rest.find(Symbol::separator)) != Frame::npos) 
   {  
-    frames.push_back(s0.substr(0, pos));
-    s0 = s0.substr(pos+1, s0.length());  
+    frames.push_back(rest.substr(0, pos));
+    rest = rest.substr(pos+1, rest.length());  
   }
-  frames.push_back(s0);
+  frames.push_back(rest);
   eliminateDoubleSeparator(frames);
 
 }

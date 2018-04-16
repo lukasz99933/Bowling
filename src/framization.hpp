@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <iterator>
-#include <stdexcept>
 
 using Frame = std::string;
 using Frames = std::vector<Frame>;
@@ -23,12 +22,12 @@ namespace Symbol
 class Framization
 {
 public:
-  Framization(const std::string& s);
+  Framization(const std::string& input);
   Frames getFrames() const& {return frames;};
 private:
   Frames frames;
 
-  void eliminateDoubleSeparator(Frames & frames);
+  void eliminateDoubleSeparator(Frames& frames);
 };
 
 
