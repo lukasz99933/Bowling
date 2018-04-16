@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class bowlingTest : public ::testing::Test
+class bowlingScoreParamTest : public ::testing::TestWithParam<pair<string,int>>
 {
 public:
   const string perfectScore = "X|X|X|X|X|X|X|X|X|X||XX";
@@ -13,22 +13,14 @@ public:
   const string perfectNoob = "--|--|--|--|--|--|--|--|--|--||";
 };
 
-class bowlingScoreParamTest : public ::testing::TestWithParam<pair<string,int>>
-{
-public:
-};
-
 class bowlingValidationParamTest : public ::testing::TestWithParam<string>
 {
 public:
 };
 
-// test of total score:
-
 TEST_P(bowlingScoreParamTest, countScore)
 {
-    Bowling game(GetParam().first);
-    ASSERT_EQ(game.countScore(),GetParam().second);
+    ASSERT_EQ(Bowling(GetParam().first).countScore(),GetParam().second);
 }
 
 INSTANTIATE_TEST_CASE_P(countScores,
@@ -48,12 +40,10 @@ INSTANTIATE_TEST_CASE_P(countScores,
                                          )    
                        );
 
-// test of validation:
 
 TEST_P(bowlingValidationParamTest, incorrectData)
 {
-  Bowling game(GetParam());
-  ASSERT_THROW(game.countScore(), std::invalid_argument);
+  ASSERT_THROW(Bowling(GetParam()).countScore(), std::invalid_argument);
 }
 
 INSTANTIATE_TEST_CASE_P(incorrectData,
