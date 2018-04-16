@@ -18,7 +18,7 @@ void Bowling::frameize(const string& s)
   Frame::size_type pos;
   while ((pos = s0.find(Symbol::separator)) != Frame::npos) 
   {  
-    frames.push_back(s0.substr(0,pos));
+    frames.push_back(s0.substr(0, pos));
     s0 = s0.substr(pos+1, s0.length());  
   }
   frames.push_back(s0);
@@ -47,11 +47,12 @@ bool Bowling::isSymbolCorrect(const char ch)
 
 bool Bowling::areSymbolsCorrect(const Frame& frame)
 {
-  return all_of(frame.begin(), frame.end(), 
-           [=](const char symbol) 
-           { 
-             return isSymbolCorrect(symbol);
-           });
+  return all_of(frame.begin(), 
+                frame.end(), 
+                [=](const char symbol) 
+                { 
+                  return isSymbolCorrect(symbol);
+                });
 }
 
 
@@ -63,11 +64,14 @@ bool Bowling::isFrameSizeCorrect(const Frame& frame)
 
 bool Bowling::validateFrames()
 {
-  return all_of(frames.begin(), prev(frames.end()),
-           [=](const Frame & frame) 
-           {
-             return isFrameSizeCorrect(frame) and areSymbolsCorrect(frame) and (frame.size()!=2 or sumAPair(frame)<=10);
-           } );       
+  return all_of(frames.begin(), 
+                prev(frames.end()),
+                [=](const Frame & frame) 
+                {
+                  return isFrameSizeCorrect(frame) 
+                     and areSymbolsCorrect(frame) 
+                     and (frame.size()==1 or sumAPair(frame)<=10);
+                } );       
 }
 
 
@@ -116,12 +120,14 @@ int Bowling::countExtra(const Iterator & it)
 int Bowling::countExtras()  
 {  
   Iterator it = frames.begin();
-  return accumulate(it, prev(frames.end()), 0, 
-              [&](int & sum, const Frame & frame) 
-              { 
-                return sum + countExtra(it++);
-                (void)(frame);
-              });
+  return accumulate(it, 
+                    prev(frames.end()), 
+                    0, 
+                    [&](int & sum, const Frame & frame) 
+                    { 
+                      return sum + countExtra(it++);
+                      (void)(frame);
+                    });
 } 
 
 
@@ -139,11 +145,13 @@ int Bowling::countSeparateScore(const Frame& frame)
 
 int Bowling::countStandardScore()
 {  
-  return accumulate(frames.begin(), prev(frames.end()), 0, 
-              [=](int & sum, const Frame & frame) 
-              { 
-                return sum + countSeparateScore(frame);
-              });
+  return accumulate(frames.begin(), 
+                    prev(frames.end()), 
+                    0, 
+                    [=](int & sum, const Frame & frame) 
+                    { 
+                      return sum + countSeparateScore(frame);
+                    });
 }
 
 
