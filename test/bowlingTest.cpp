@@ -91,89 +91,6 @@ TEST_F(bowlingTest, _5slashFrames)
   ASSERT_EQ(game.getFrames(), expected);
 }
 
-// tests of validateFrames method:
-
-TEST_F(bowlingTest, validationTooManySymbols)
-{
-    Bowling game("XXX|7/|9-|X|-8|8/|-6|X|X|X||81");
-    ASSERT_FALSE(game.validateFrames());
-}
-
-TEST_F(bowlingTest, validationTooManyDigits)
-{
-    Bowling game1("99|X|X|X|X|X|X|X|X|X||XX");
-    ASSERT_FALSE(game1.validateFrames());
-}
-
-
-TEST_F(bowlingTest, validationIncorrectSeparators)
-{
-    Bowling game1("X|X|X|X|X|X||X|X|X|X|XX");
-    ASSERT_FALSE(game1.validateFrames());
-}
-
-TEST_F(bowlingTest, validationIncorrectSymbol)
-{
-    Bowling game2("Y|7/|9-|X|-8|8/|-6|X|X|X||81");
-    ASSERT_FALSE(game2.validateFrames());
-
-    Bowling game3(mixed);
-    ASSERT_TRUE(game3.validateFrames());
-}
-
-TEST_F(bowlingTest, validationTooFewSymbols)
-{
-    Bowling game1("|||X||81");
-    ASSERT_FALSE(game1.validateFrames());
-
-    Bowling game2("X|7/|9-|X|||-8|8/|-6|X|X|X||81");
-    ASSERT_FALSE(game2.validateFrames());
-
-    Bowling game3("X|7/|9-|X|||||-8|8/|-6|X|X|X||81");
-    ASSERT_FALSE(game3.validateFrames());
-}
-
-
-// test of extras:
-
-TEST_F(bowlingTest, noExtras)
-{
-  Bowling game(perfectNoob);
-  ASSERT_EQ(game.countExtras(), 0);
-}
-
-TEST_F(bowlingTest, extrasforFives)
-{
-  Bowling game(twentyOneFives);
-  ASSERT_EQ(game.countExtras(), 50);
-}
-
-TEST_F(bowlingTest, doesExtraSum)
-{
-  Bowling game("X|34|--|--|--|--|--|--|--|--||");
-  ASSERT_EQ(game.countExtras(), 7);
-}
-
-
-TEST_F(bowlingTest, doesExtraCountSpare)
-{
-  Bowling game("X|3/|--|--|--|--|--|--|--|--||");
-  ASSERT_EQ(game.countExtras(), 10);
-}
-
-TEST_F(bowlingTest, twoStrikesExtra)
-{
-
-  Bowling game("X|X|23|--|--|--|--|--|--|--||");
-  ASSERT_EQ(game.countExtras(), 17);
-}
-
-TEST_F(bowlingTest, perfectExtra)
-{
-  Bowling game(perfectScore);
-  ASSERT_EQ(game.countExtras(), 200);
-}
-
 
 // test of total score:
 
@@ -183,10 +100,10 @@ TEST_P(bowlingScoreParamTest, countScore)
     ASSERT_EQ(game.countScore(),GetParam().second);
 }
 
-
 INSTANTIATE_TEST_CASE_P(countScores,
                         bowlingScoreParamTest,
-                        ::testing::Values(make_pair("X|X|X|X|X|X|X|X|X|X||XX",         10*30),
+                        ::testing::Values(make_pair("--|--|--|--|--|--|--|--|--|--||", 0),
+                                          make_pair("X|X|X|X|X|X|X|X|X|X||XX",         10*30),
                                           make_pair("9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||", 10*9),
                                           make_pair("5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5",10*15),
                                           make_pair("X|7/|9-|X|-8|8/|-6|X|X|X||81",    167),
@@ -211,7 +128,13 @@ TEST_P(bowlingValidationParamTest, incorrectData)
 INSTANTIATE_TEST_CASE_P(incorrectData,
                         bowlingValidationParamTest,
                         ::testing::Values("111|--|--|--|--|--|--|--|--|--||",
-                                          "0-|--|--|--|--|--|--|--|--|--||"
+                                          "0-|--|--|--|--|--|--|--|--|--||",
+                                          "XXX|7/|9-|X|-8|8/|-6|X|X|X||81",
+                                          "99|X|X|X|X|X|X|X|X|X||XX",
+                                          "X|X|X|X|X|X||X|X|X|X|XX",
+                                          "Y|7/|9-|X|-8|8/|-6|X|X|X||81",
+                                          "|||X||81",
+                                          "X|7/|9-|X|||-8|8/|-6|X|X|X||81"
                                          )    
                        );
 

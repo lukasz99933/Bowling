@@ -26,13 +26,13 @@ class Bowling
 public:
   Bowling(const std::string& s);
   auto getFrames() const { return frames; };
-  bool validateFrames();  
-  int countExtras(); 
   int countScore();
 
 private:
-  void frameize(const std::string& s);
   Frames frames;
+
+  void frameize(const std::string& s);
+  bool validateFrames();  
   bool validateFrame(const Frame& frame);
   int scoreFor2Balls(const Iterator & it);
   int countSeparateScore(const Frame& frame);  
@@ -49,7 +49,7 @@ private:
   bool isFrameSizeCorrect(const Frame& frame);
 
   int translateChar(const char ch); 
-
+  int countExtras(); 
 };
 
 
