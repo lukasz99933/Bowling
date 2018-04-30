@@ -43,6 +43,7 @@ set(SRC_LIST
     src/main.cpp
     src/bowling.cpp
     src/framization.cpp
+    src/validator.cpp
 )
 
 include_directories(src)

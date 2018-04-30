@@ -1,78 +1,13 @@
 #include "bowling.hpp"
-#include <cctype>
-#include <numeric>
+#include "validator.hpp"
 #include <algorithm>
 
 using namespace std;
-
-bool inside(const string & s, const char ch)
-{
-  return s.find(ch) != std::string::npos;
-}
-
-
-bool Bowling::isSymbolCorrect(const char ch)
-{
-  return inside(Symbol::correctSymbols, ch);
-}
-
-
-bool Bowling::areSymbolsCorrect(const Frame& frame)
-{
-  return all_of(frame.begin(), 
-                frame.end(), 
-                [=](const char symbol)  { return isSymbolCorrect(symbol); });
-}
-
-
-bool Bowling::isFrameSizeCorrect(const Frame& frame)
-{
-  return frame.size() <= 2 and frame.size() > 0 ;
-}
-
-bool Bowling::validateFrame(Frame frame)
-{
-   return isFrameSizeCorrect(frame) 
-          and areSymbolsCorrect(frame) 
-          and (frame.size()==1 or sumAPair(frame)<=10);
-}
-
-bool Bowling::validateFrames(const Frames& frames)
-{
-  return all_of(frames.begin(), 
-                prev(frames.end()),
-                [=](const Frame & frame)  { return validateFrame(frame); } );       
-}
-
-
-int Bowling::translateChar(const char ch)
-{
-  if (ch==Symbol::miss or ch==Symbol::spare)
-    return 0;
-  else if (ch == Symbol::strike)
-    return 10;
-  else
-    return ch - '0';
-}
-
-
-bool hasStrike(const Frame& frame)
-{
-  return frame[0] == Symbol::strike;
-}
-
-
-bool hasSpare(const Frame& frame)
-{
-  return frame.length() == 2 and frame[1] == Symbol::spare;
-}
-
 
 int Bowling::scoreFor2Balls(const Iterator & it)
 {
   return it->length() == 2  ?  sumAPair(*it)  :  10 + translateChar((*next(it))[0]); 
 }
-
 
 int Bowling::countExtra(const Iterator & it)  
 {
@@ -83,7 +18,7 @@ int Bowling::countExtra(const Iterator & it)
     return translateChar(nextFrame[0]);
   else if (hasStrike(frame)) 
     return scoreFor2Balls(next(it));
-  else return 0; 
+  return 0; 
 }
 
 
@@ -101,10 +36,6 @@ int Bowling::countExtras(Frames frames)
 } 
 
 
-int Bowling::sumAPair(const Frame& frame)
-{
-  return  hasSpare(frame)  ?  10  :  translateChar(frame[0]) + translateChar(frame[1]);                
-}
 
 
 int Bowling::countSeparateScore(const Frame& frame)
@@ -129,8 +60,6 @@ int Bowling::countScore(const string& input)
 {
   Framization framization(input);
   Frames frames = framization.getFrames();
-  if (validateFrames(frames))
-    return countStandardScore(frames) + countExtras(frames);
-  else 
-    throw std::invalid_argument("Invalid input!");
+  Validator validator(frames);
+  return countStandardScore(frames) + countExtras(frames);
 }

@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <iterator>
 
 using Frame = std::string;
 using Frames = std::vector<Frame>;
