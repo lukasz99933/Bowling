@@ -1,6 +1,7 @@
 #include "bowling.hpp"
 #include "validator.hpp"
 #include <algorithm>
+#include <numeric>
 
 using namespace std;
 
