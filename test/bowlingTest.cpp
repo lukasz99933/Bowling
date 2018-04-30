@@ -38,7 +38,7 @@ INSTANTIATE_TEST_CASE_P(countScores,
                                           make_pair("--|--|--|--|--|2-|--|--|--|--||", 2),
                                           make_pair("--|--|--|X|--|--|--|--|--|--||",  10),
                                           make_pair("--|--|--|--|--|--|8/|--|--|--||" ,10)
-                                         )    
+                                         ) ,   
                        );
 
 
@@ -58,6 +58,6 @@ INSTANTIATE_TEST_CASE_P(incorrectData,
                                           "Y|7/|9-|X|-8|8/|-6|X|X|X||81",
                                           "|||X||81",
                                           "X|7/|9-|X|||-8|8/|-6|X|X|X||81"
-                                         )    
+                                         ) ,   
                        );
 

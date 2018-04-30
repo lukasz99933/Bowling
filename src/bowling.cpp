@@ -21,7 +21,6 @@ int Bowling::countExtra(const Iterator & it)
   return 0; 
 }
 
-
 int Bowling::countExtras(Frames frames)  
 {  
   Iterator it = frames.begin();
@@ -35,14 +34,10 @@ int Bowling::countExtras(Frames frames)
                     });
 } 
 
-
-
-
 int Bowling::countSeparateScore(const Frame& frame)
 {
   return  frame.length() == 1  ?   10  :  sumAPair(frame);
 }
-
 
 int Bowling::countStandardScore(const Frames& frames)
 {  
@@ -54,7 +49,6 @@ int Bowling::countStandardScore(const Frames& frames)
                       return sum + countSeparateScore(frame);
                     });
 }
-
 
 int Bowling::countScore(const string& input)
 {

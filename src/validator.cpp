@@ -58,9 +58,9 @@ bool Validator::isFrameSizeCorrect(const Frame& frame)
 
 bool Validator::validateFrame(Frame frame)
 {
-   return isFrameSizeCorrect(frame) and
-          areSymbolsCorrect(frame) and
-          (frame.size()==1 or sumAPair(frame)<=10);
+  return isFrameSizeCorrect(frame) and
+         areSymbolsCorrect(frame) and
+         (frame.size()==1 or sumAPair(frame)<=10);
 }
 
 bool Validator::validateFrames(const Frames& frames)
