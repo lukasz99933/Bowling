@@ -60,7 +60,8 @@ bool Validator::validateFrame(Frame frame)
 {
   return isFrameSizeCorrect(frame) and
          areSymbolsCorrect(frame) and
-         (frame.size()==1 or sumAPair(frame)<=10);
+         (frame.size()==1 or sumAPair(frame)<=10) and
+         frame[0] != Symbol::spare;
 }
 
 bool Validator::validateFrames(const Frames& frames)
