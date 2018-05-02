@@ -7,11 +7,12 @@ using namespace std;
 void Framization::eliminateDoubleSeparator(Frames & frames)
 {
   const int FRAMES_NO = 10;
+  Frame& mustBeEmpty = *((frames.begin() + FRAMES_NO));
   if (frames.size() > FRAMES_NO + 1) {
-    if (*((frames.begin() + FRAMES_NO)) == "")
+    if (mustBeEmpty == "")
       frames.erase(frames.begin() + FRAMES_NO);
     else
-      *((frames.begin() + FRAMES_NO)) = "ERROR";
+      mustBeEmpty = "ERROR";
   }
 }
 
