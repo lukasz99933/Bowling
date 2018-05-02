@@ -47,7 +47,9 @@ bool Validator::areSymbolsCorrect(const Frame& frame)
 {
   return all_of(frame.begin(), 
                 frame.end(), 
-                [=](const char symbol)  { return isSymbolCorrect(symbol); });
+                [=](const char symbol)  { 
+                  return isSymbolCorrect(symbol); 
+                });
 }
 
 
@@ -60,16 +62,18 @@ bool Validator::validateFrame(Frame frame)
 {
   return isFrameSizeCorrect(frame) and
          areSymbolsCorrect(frame) and
-         (frame.size()==1 or sumAPair(frame)<=10) and
+         not (frame.size()>1 and sumAPair(frame)>10) and
          frame[0] != Symbol::spare and
-         not(frame.size()==2 and sumAPair(frame)==10 and frame[1] != Symbol::spare);
+         not (frame.size()==2 and sumAPair(frame)==10 and frame[1] != Symbol::spare);
 }
 
 bool Validator::validateFrames(const Frames& frames)
 {
   return all_of(frames.begin(), 
                 prev(frames.end()),
-                [=](const Frame & frame)  { return validateFrame(frame); } );       
+                [=](const Frame & frame)  { 
+                  return validateFrame(frame); 
+                } );       
 }
 
 Validator::Validator(const Frames& frames) 
