@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "bowling.hpp"
+#include "Accumulator.hpp"
 
 using namespace std;
 
@@ -8,6 +9,10 @@ class bowlingScoreParamTest : public ::testing::TestWithParam<pair<string,int>>
 };
 
 class bowlingValidationParamTest : public ::testing::TestWithParam<string>
+{
+};
+
+class accumulatorTest : public ::testing::Test
 {
 };
 
@@ -56,4 +61,16 @@ INSTANTIATE_TEST_CASE_P(incorrectData,
                                           "--|--|--|--|--|--|--|--|--|--|--|"
                                          ) ,   
                        );
+
+TEST_F(accumulatorTest, accumulator)
+{
+  Accumulator acc;
+  ASSERT_TRUE(acc == 0);
+
+  ++acc;
+  ASSERT_TRUE(acc == 1);
+
+}
+
+
 
