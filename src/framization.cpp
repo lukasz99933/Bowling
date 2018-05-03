@@ -4,19 +4,6 @@
 
 using namespace std;
 
-void Framization::eliminateDoubleSeparator(Frames & frames)
-{
-  const int FRAMES_NO = 10;
-  Frame& mustBeEmpty = *((frames.begin() + FRAMES_NO));
-  if (frames.size() > FRAMES_NO + 1) {
-    if (mustBeEmpty == "")
-      frames.erase(frames.begin() + FRAMES_NO);
-    else
-      mustBeEmpty = "ERROR";
-  }
-}
-
-
 Framization::Framization(const string& input)
 {
   Frame rest = input;
@@ -30,5 +17,19 @@ Framization::Framization(const string& input)
   eliminateDoubleSeparator(frames);
 
 }
+
+void Framization::eliminateDoubleSeparator(Frames & frames)
+{
+  const int FRAMES_NO = 10;
+  Frame& mustBeEmpty = *((frames.begin() + FRAMES_NO));
+  if (frames.size() > FRAMES_NO + 1) {
+    if (mustBeEmpty == "")
+      frames.erase(frames.begin() + FRAMES_NO);
+    else
+      mustBeEmpty = "ERROR";
+  }
+}
+
+
 
 

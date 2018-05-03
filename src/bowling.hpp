@@ -11,11 +11,11 @@ public:
   int countScore(const std::string& input);
 
 private:
-  int scoreFor2Balls(const Iterator & it);
-  int countSeparateScore(const Frame& frame);  
   int countStandardScore(const Frames& frames);
-  int countExtra(const Iterator & it);
   int countExtras(Frames frames);
+  int countSeparateScore(const Frame& frame);  
+  int countExtra(const Iterator & it);
+  int scoreFor2Balls(const Iterator & it);
 };
 
 

@@ -5,17 +5,10 @@ using namespace std;
 
 class bowlingScoreParamTest : public ::testing::TestWithParam<pair<string,int>>
 {
-public:
-  const string perfectScore = "X|X|X|X|X|X|X|X|X|X||XX";
-  const string alwaysAlmostPerfect = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
-  const string twentyOneFives = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
-  const string mixed = "X|7/|9-|X|-8|8/|-6|X|X|X||81";
-  const string perfectNoob = "--|--|--|--|--|--|--|--|--|--||";
 };
 
 class bowlingValidationParamTest : public ::testing::TestWithParam<string>
 {
-public:
 };
 
 TEST_P(bowlingScoreParamTest, countScore)
